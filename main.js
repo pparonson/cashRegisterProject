@@ -1,3 +1,4 @@
+//Cole was here
 var cashRegister = require('cashRegister');
 
 console.log(new cashRegister.Account());
