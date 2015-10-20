@@ -1,4 +1,5 @@
 //Cole was here
+// Byron was here
 var cashRegister = require('cashRegister');
 
 console.log(new cashRegister.Account());
