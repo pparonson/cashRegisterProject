@@ -1,5 +1,4 @@
-//Cole was here
-// Byron was here
+// cleaning up this file
 var cashRegister = require('cashRegister');
 
 console.log(new cashRegister.Account());
