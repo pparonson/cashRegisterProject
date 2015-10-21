@@ -1,4 +1,3 @@
-// cleaning up this file
 var cashRegister = require('cashRegister');
 
 console.log(new cashRegister.Account());
