@@ -5,7 +5,8 @@
   "main": "main.js",
   "dependencies": {
     "cashRegister": "^1.0.0",
-	"subscribers": "^1.0.0"
+    "jquery": "^2.1.4",
+    "subscribers": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
