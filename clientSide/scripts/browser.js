@@ -28,7 +28,7 @@ $(document).ready(function(){
 		var welcome=$("#welcomePage")
 		welcome.css("display","block")
 		$("#submitWelcome").click(function(){
-			account=cashRegister.Account.initializeAccount($("#SBalance").val(), $("#acctName").val());
+			account=cashRegister.Account.initializeAccount(($("#SBalance").val()*1), $("#acctName").val());
 			welcome.css("display","none");
 			presentAccount();
 			account.subscribe("change", function(){
@@ -72,7 +72,14 @@ function presentAccount(){
 		
 	}
 	function makeRow(transactionObj){
+		
 		var tr = $("<tr></tr>");
+		if (transactionObj.amount<0){
+			tr.addClass("withdrawRow");
+		}
+		else{
+			tr.addClass("depositRow");
+		}
 		tr.append($("<td>"+transactionObj.date+"</td>"));
 		tr.append($("<td>"+transactionObj.amount+"</td>"));
 		tr.append($("<td>"+transactionObj.type+"</td>"));
