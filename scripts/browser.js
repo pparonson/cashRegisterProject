@@ -39,10 +39,14 @@ $(document).ready(function(){
 function presentAccount(){
 	$("#accountMainPage").css("display","block");
 	var table=$("#mainTable");
-	if (table.children.length>1){
-		for(var i = 1; i<table.children.length;i++){
-			table.children[i].remove();
-		}
+	table.empty();
+	table.append($("<tr g='from js'><th>Date</th><th>Amount</th><th>Type</th><th>Memo</th><th>Balance</th></tr>"));
+	var row, i;
+	for (i=0;i<account.transactions.length;i++){
+		
+	}
+	function makeRow(transactionObj){
+		var 
 	}
 	
 }
