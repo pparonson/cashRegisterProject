@@ -20,9 +20,9 @@ $(document).ready(function(){
 		var obj = JSON.parse(localStorageJson);
 		account=cashRegister.Account.loadJSON(obj);
 		presentAccount();
-		// account.subscribe("change", function(){
-		// presentAccount();	
-		// });
+		account.subscribe("change", function(){
+		presentAccount();	
+		});
 	}
 	if (!account){
 		var welcome=$("#welcomePage")
@@ -31,9 +31,9 @@ $(document).ready(function(){
 			account=cashRegister.Account.initializeAccount($("#SBalance").val(), $("#acctName").val());
 			welcome.css("display","none");
 			presentAccount();
-			// account.subscribe("change", function(){
-			// presentAccount();
-			// })
+			account.subscribe("change", function(){
+			presentAccount();
+			})
 		})
 		//send to welcome page 
 		//initialize account by calling cashRegister.Account.initializeAccount(balance, acctname) and call presentAccount
@@ -41,7 +41,7 @@ $(document).ready(function(){
 	
 	$("#submitDeposit").click(function(){
 		
-		account.addTransaction($("#transactionAmount").val()
+		account.addTransaction(($("#transactionAmount").val()*1)
 					,$("#transactionDate").val()
 					,$("#accountType").val()
 					,$("#memo").val());
@@ -79,6 +79,7 @@ function presentAccount(){
 		tr.append($("<td>"+transactionObj.memo+"</td>"));
 		return tr;
 	}
+	$("#currentBalance").html("Balance: "+account.currentBalance);
 
 }
 
