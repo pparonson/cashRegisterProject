@@ -49,7 +49,7 @@ body {
 	border:1px solid #d6bcd6;
 	display:inline-block;
 	cursor:pointer;
-	color:#3a8a9e;
+	color:red;
 	font-family:Arial;
 	font-size:11px;
 	padding:7px 25px;
@@ -70,6 +70,16 @@ body {
 	position:relative;
 	top:1px;
 }
+.style-5 input[type="number"] {
+  padding: 10px;
+  border: solid 1px black;
+  box-shadow: inset 1px 1px 2px 0 #707070;
+  transition: box-shadow 0.3s;
+}
+.style-5 input[type="number"]:focus,
+.style-5 input[type="number"].focus {
+  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
 .style-5 input[type="text"] {
   padding: 10px;
   border: solid 1px black;
@@ -78,5 +88,25 @@ body {
 }
 .style-5 input[type="text"]:focus,
 .style-5 input[type="text"].focus {
+  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
+.style-5 input[type="date"] {
+  padding: 10px;
+  border: solid 1px black;
+  box-shadow: inset 1px 1px 2px 0 #707070;
+  transition: box-shadow 0.3s;
+}
+.style-5 input[type="date"]:focus,
+.style-5 input[type="date"].focus {
+  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
+.style-5 input[list="transactionTypes"] {
+  padding: 10px;
+  border: solid 1px black;
+  box-shadow: inset 1px 1px 2px 0 #707070;
+  transition: box-shadow 0.3s;
+}
+.style-5 input[list="transactionTypes"]:focus,
+.style-5 input[list="transactionTypes"].focus {
   box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
