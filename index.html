@@ -9,24 +9,9 @@
 
   <link rel="stylesheet" type="text/css" href="cbp.css">
 
-<script src="libs/jquery-2.1.4.js" type="text/javascript"></script>
-<script src="libs/jquery-ui.js" type="text/javascript"></script>
+<script data-main="scripts/browser.js" src="scripts/require.js"></script>
 
 
-<script type="text/javascript">
-<!-- javascript section-->
-$(document).ready(function () {
-    /*
-    instert content here
-    */
-
-});
-
-</script>
-  <style type="text/css">
-
-
-  </style>
 
 <title>Banking Account Manager - cbp</title>
 </head>
@@ -62,7 +47,8 @@ $(document).ready(function () {
         <option value="Cash">
       </datalist>
       <input type="text" name="memo" id="memo" placeholder="Memo">
-      <input type="button" value="Submit" id="submitMainPage">
+      <input type="button" value="Deposit" id="submitDeposit">
+      <input type="button" value="Withdraw" id="submitWithdraw">
     </form>
     <h1 id="currentBalance">Balance</h1>
     <table id="mainTable">
