@@ -1,11 +1,21 @@
 //needs access to Jquery and cashRegister.js (this in turn needs subscribers)
-var cashRegister = require('cashRegister');
+requirejs.config({
+	paths:{
+		cashRegister: "../node_modules/cashRegister/cashRegister",
+		jquery: "../node_modules/jquery/dist/jquery.min",
+		subscribers: "../node_modules/subscribers/subscribers"
+	}
+})
+
+require(["cashRegister", "jquery"], function (cashRegister, $) {
+//var cashRegister = require('cashRegister');
 var account;
 $(document).ready(function(){
 	//make a decision
-	
 	var localStorageJson = localStorage.getItem("Account");
-	if (localStorageJson){
+	if (localStorageJson&&localStorageJson!=="undefined"){
+		console.log(typeof localStorageJson)
+		console.log(localStorageJson)
 		var obj = JSON.parse(localStorageJson);
 		account=cashRegister.Account.loadJSON(obj);
 		presentAccount();
@@ -39,4 +49,5 @@ function presentAccount(){
 
 $(window).unload(function(){
 	localStorage.setItem("Account", JSON.stringify(account))
+})
 })
