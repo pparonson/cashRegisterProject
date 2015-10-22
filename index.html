@@ -24,12 +24,15 @@
   </header>
   <main>
     <div id="welcomePage">
-        <h1 id="introMessage">Know Your Journey</h1>
+      <div id="introMessage">
+        <h1>Know Your Journey</h1>
+      </div>
       <h3 id="systemName">Account Manager System</h3>
     <form action="" method="post">
       <input type="text" name="fName"  id="fName" placeholder="First Name"><br>
       <input type="text" name="lName" id="lName" placeholder="Last Name"><br><br>
       <input type="number" name="SBalance" id="SBalance" placeholder="Starting Balance">
+      <input type="text" name="acctType" id="acctType">
       <input type="button" value="Submit" id="submitWelcome">
     </form>
   </div>
@@ -37,7 +40,7 @@
     <form action="" method="post">
       <input type="number" name="amount" id="transactionAmount" placeholder="Transaction Amount "><br>
       <input type="date" name="date" id="transactionDate"><br><br>
-      <label for="accountType">Type of transaction.</lable><br>
+      <label for="accountType">Type of transaction.</label><br>
       <input list="transactionTypes" name="type" id="accountType"><br>
       <datalist id="transactionTypes">
         <option value="Credit Card">
