@@ -1,9 +1,9 @@
 //needs access to Jquery and cashRegister.js (this in turn needs subscribers)
 requirejs.config({
 	paths:{
-		cashRegister: "../node_modules/cashRegister/cashRegister",
-		jquery: "../node_modules/jquery/dist/jquery.min",
-		subscribers: "../node_modules/subscribers/subscribers"
+		cashRegister: "../../node_modules/cashRegister/cashRegister",
+		jquery: "../../node_modules/jquery/dist/jquery.min",
+		subscribers: "../../node_modules/subscribers/subscribers"
 	}
 })
 
@@ -14,11 +14,15 @@ $(document).ready(function(){
 	//make a decision
 	var localStorageJson = localStorage.getItem("Account");
 	if (localStorageJson&&localStorageJson!=="undefined"){
+		$("#welcomePage").css("display","none");	//temporary
 		console.log(typeof localStorageJson)
 		console.log(localStorageJson)
 		var obj = JSON.parse(localStorageJson);
 		account=cashRegister.Account.loadJSON(obj);
 		presentAccount();
+		account.subscribe("change", function(){
+		presentAccount();	
+		});
 	}
 	if (!account){
 		var welcome=$("#welcomePage")
@@ -27,11 +31,30 @@ $(document).ready(function(){
 			account=cashRegister.Account.initializeAccount($("#SBalance").val(), $("#acctName").val());
 			welcome.css("display","none");
 			presentAccount();
+			account.subscribe("change", function(){
+			presentAccount();
+			})
 		})
 		//send to welcome page 
 		//initialize account by calling cashRegister.Account.initializeAccount(balance, acctname) and call presentAccount
 	}
 	
+	$("#submitDeposit").click(function(){
+		
+		account.addTransaction(($("#transactionAmount").val()*1)
+					,$("#transactionDate").val()
+					,$("#accountType").val()
+					,$("#memo").val());
+		
+	});
+	$("#submitWithdraw").click(function(){
+
+		account.addTransaction(($("#transactionAmount").val()*-1)
+					,$("#transactionDate").val()
+					,$("#accountType").val()
+					,$("#memo").val());
+		
+	});
 	
 	
 	
@@ -39,12 +62,25 @@ $(document).ready(function(){
 function presentAccount(){
 	$("#accountMainPage").css("display","block");
 	var table=$("#mainTable");
-	if (table.children.length>1){
-		for(var i = 1; i<table.children.length;i++){
-			table.children[i].remove();
-		}
+	table.empty();
+	table.append($("<tr><th>Date</th><th>Amount</th><th>Type</th><th>Memo</th><th>Balance</th></tr>"));
+	table.append($("<tr><td colspan='4'>Starting Balance</td><th>"+account.startingBalance+"</th></tr>"));
+	var row, i;
+	for (i=0;i<account.transactions.length;i++){
+		row = makeRow(account.transactions[i]);
+		table.append(row);
+		
 	}
-	
+	function makeRow(transactionObj){
+		var tr = $("<tr></tr>");
+		tr.append($("<td>"+transactionObj.date+"</td>"));
+		tr.append($("<td>"+transactionObj.amount+"</td>"));
+		tr.append($("<td>"+transactionObj.type+"</td>"));
+		tr.append($("<td>"+transactionObj.memo+"</td>"));
+		return tr;
+	}
+	$("#currentBalance").html("Balance: "+account.currentBalance);
+
 }
 
 $(window).unload(function(){
