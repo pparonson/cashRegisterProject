@@ -22,10 +22,13 @@
   <header>
 
   </header>
-  <main>
-    <div id="welcomePage">
-      <div id="introMessage">
+  <div id="welcomePage">
+    <div id="introMessage">
+      <div id="tagName">
         <h1>Know Your Journey</h1>
+      </div>
+  <main>
+
       </div>
       <h3 id="systemName">Account Manager System</h3>
     <form action="" method="post">
@@ -33,11 +36,11 @@
       <input type="text" name="lName" id="lName" placeholder="Last Name"><br><br>
       <input type="number" name="SBalance" id="SBalance" placeholder="Starting Balance">
       <input type="text" name="acctType" id="acctType">
-      <input type="button" value="Submit" id="submitWelcome">
+      <input type="button" value="Submit" class="myButton"id="submitWelcome">
     </form>
   </div>
   <div id="accountMainPage">
-    <form action="" method="post">
+    <form action=""  method="post"><div class="style-5">
       <input type="number" name="amount" id="transactionAmount" placeholder="Transaction Amount "><br>
       <input type="date" name="date" id="transactionDate"><br><br>
       <label for="accountType">Type of transaction.</label><br>
@@ -50,12 +53,16 @@
         <option value="Cash">
       </datalist>
       <input type="text" name="memo" id="memo" placeholder="Memo">
-      <input type="button" value="Deposit" id="submitDeposit">
-      <input type="button" value="Withdraw" id="submitWithdraw">
+      <input type="button" value="Deposit" class="myButton" id="submitDeposit">
+      <input type="button" value="Withdraw" class="myButton" id="submitWithdraw">
+    </div>
     </form>
     <h1 id="currentBalance">Balance</h1>
     <table id="mainTable">
-      <tr><th>Date</th><th>Amount</th><th>Type</th><th>Memo</th></tr>
+      <tr><th>Date</th><th>Amount</th><th>Type</th><th>Memo</th><th>Balance</></tr>
+      <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+      <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
+      <tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
     </table>
     </div>
   </main>
