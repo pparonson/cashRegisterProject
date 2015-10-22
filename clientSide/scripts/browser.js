@@ -1,9 +1,9 @@
 //needs access to Jquery and cashRegister.js (this in turn needs subscribers)
 requirejs.config({
 	paths:{
-		cashRegister: "../node_modules/cashRegister/cashRegister",
-		jquery: "../node_modules/jquery/dist/jquery.min",
-		subscribers: "../node_modules/subscribers/subscribers"
+		cashRegister: "../../node_modules/cashRegister/cashRegister",
+		jquery: "../../node_modules/jquery/dist/jquery.min",
+		subscribers: "../../node_modules/subscribers/subscribers"
 	}
 })
 
@@ -39,10 +39,21 @@ $(document).ready(function(){
 function presentAccount(){
 	$("#accountMainPage").css("display","block");
 	var table=$("#mainTable");
-	if (table.children.length>1){
-		for(var i = 1; i<table.children.length;i++){
-			table.children[i].remove();
-		}
+	table.empty();
+	table.append($("<tr g='from js'><th>Date</th><th>Amount</th><th>Type</th><th>Memo</th><th>Balance</th></tr>"));
+	var row, i;
+	for (i=0;i<account.transactions.length;i++){
+		row = makeRow(account.transactions[i]);
+		table.append(row);
+		
+	}
+	function makeRow(transactionObj){
+		var tr = $("<tr></tr>");
+		tr.append($("<td>"+transactionObj.date+"</td>"));
+		tr.append($("<td>"+transactionObj.amount+"</td>"));
+		tr.append($("<td>"+transactionObj.type+"</td>"));
+		tr.append($("<td>"+transactionObj.memo+"</td>"));
+		return tr;
 	}
 	
 }
