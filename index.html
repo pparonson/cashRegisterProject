@@ -8,31 +8,20 @@
   <title>Banking Account Manager - cbp</title>
 </head>
 <body>
-
-
-  <header>
-
-  </header>
-
     <div id="introMessage">
-      <div id="tagName">
-        <h1>Know Your Journey</h1>
-      </div>
-      </div>
-
+        <div id="tagName">
+            <h1>Know Your Journey</h1>
+        </div>
+    </div><br/>
   <main>
     <div id="welcomePage">
       <h3  id="systemName">Account Manager System</h3>
-    <form action="" class="style-5" method="post">
-
- 
-    <div id="welcomePage"></div>
-    <div id="introMessage"></div>
-    <div id="tagName">
-    <h1>Know Your Journey</h1>
-    </div>
-  
-       
+    <!-- <form action="" class="style-5" method="post"> -->
+        <div id="welcomePage"></div>
+        <div id="introMessage"></div>
+        <div id="tagName">
+            <h1>Know Your Journey</h1>
+        </div>
         <h3  id="systemName">Account Manager System</h3>
       <form action="" class="style-5" method="post">
 
@@ -44,11 +33,11 @@
     </form>
   </div>
   <div class="style-5" id="accountMainPage">
-    <form action=""  method="post">
+      <form action=""  method="post">
       <input type="number" name="amount" id="transactionAmount" placeholder="Transaction Amount "><br>
-      <input type="date" name="date" id="transactionDate"><br><br>
-      <label for="accountType">Type of transaction.</label><br>
-      <input list="transactionTypes" name="type" id="accountType"><br>
+          <input type="date" name="date" id="transactionDate"><br><br>
+            <label for="accountType">Type of transaction.</label><br>
+            <input list="transactionTypes" name="type" id="accountType"><br>
       <datalist  id="transactionTypes">
         <option value="Credit Card">
         <option value="Check #">
@@ -59,6 +48,7 @@
       <input type="text" name="memo" id="memo" placeholder="Memo">
       <input type="button" value="Deposit" class="myButton" id="submitDeposit">
       <input type="button" value="Withdraw" class="myButton" id="submitWithdraw">
+      <input type="button" value="Delete Account" class="myButton" id="deleteAccount">
     </form>
     <h1 id="currentBalance">Balance</h1>
     <table id="mainTable">
