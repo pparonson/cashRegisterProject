@@ -17,11 +17,12 @@ body {
 		}
 		#tagName {
 			width:180%;
-			height:20%;
+			xheight:20%;
 			margin:center;
-			padding-top:1%;
+			xpadding-top:1%;
 			text-align: center;
-			background:#fff;
+			/*background:#fff;*/
+            background: transparent;
 			opacity:0.2;
 			filter:alpha(opacity=20);
 		}
@@ -116,7 +117,9 @@ tr.withdrawRow {
 tr.depositRow {
   color: green;
 }
-
+#mainTable {
+    background-color: white;
+}
 #welcomePage, #accountMainPage{
-display:none;	
+display:none;
 }
