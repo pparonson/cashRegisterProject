@@ -13,7 +13,7 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 	$(document).ready(function(){
 		//make a decision
 		var localStorageJson = localStorage.getItem("Account");
-		if (localStorageJson && localStorageJson!== "undefined"){
+		if (localStorageJson && localStorageJson!== "undefined" && localStorageJson!== "null"){
 			$("#welcomePage").css("display","none");	//temporary
 			console.log(typeof localStorageJson);
 			console.log(localStorageJson);
@@ -54,6 +54,13 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 						,$("#accountType").val()
 						,$("#memo").val());
 
+		});
+		$("#deleteAccount").click(function(){
+			account=null;
+			$("#accountMainPage").css("display","none");
+			$("#welcomePage").css("display","block");
+			
+			
 		});
 
 
