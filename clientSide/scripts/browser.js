@@ -71,8 +71,8 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 		$("#accountMainPage").css("display","block");
 		var table=$("#mainTable");
 		table.empty();
-		table.append($("<tr><th>Date</th><th>Amount</th><th>Type</th><th>Memo</th><th>Balance</th></tr>"));
-		table.append($("<tr><td colspan='4'>Starting Balance</td><td class='balanceCol'>"+account.startingBalance+"</td></tr>"));
+		table.append($("<tr><th class='date'>Date</th><th class='type'>Type</th><th class='memo'>Memo</th><th class='amount'>Amount</th><th class='balance'>Balance</th></tr>"));
+		table.append($("<tr><td class='date'></td><td class='type'></td><td class='memo'></td><td class='amount'></td><td class='balanceCol'>"+account.startingBalance+"</td></tr>"));
 		var row, i;
 		for (i=0;i<account.transactions.length;i++){
 			row = makeRow(account.transactions[i]);
@@ -88,10 +88,10 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 			else{
 				tr.addClass("depositRow");
 			}
-			tr.append($("<td>"+transactionObj.date+"</td>"));
-			tr.append($("<td>"+transactionObj.amount+"</td>"));
-			tr.append($("<td>"+transactionObj.type+"</td>"));
-			tr.append($("<td>"+transactionObj.memo+"</td>"));
+			tr.append($("<td class='date'>"+transactionObj.date+"</td>"));
+			tr.append($("<td class='type'>"+transactionObj.type+"</td>"));
+			tr.append($("<td class='memo'>"+transactionObj.memo+"</td>"));
+			tr.append($("<td class='amount'>"+transactionObj.amount+"</td>"));
 			var balanceCalc = $("#mainTable tr:last-child .balanceCol").html()*1+transactionObj.amount;
 			//console.log($("#mainTable>tbody:last-child .balanceCol").html());
 			tr.append($("<td class='balanceCol'>"+balanceCalc+"</td>"));
