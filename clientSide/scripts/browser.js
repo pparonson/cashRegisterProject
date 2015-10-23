@@ -64,7 +64,7 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 		var table=$("#mainTable");
 		table.empty();
 		table.append($("<tr><th>Date</th><th>Amount</th><th>Type</th><th>Memo</th><th>Balance</th></tr>"));
-		table.append($("<tr><td colspan='4'>Starting Balance</td><th>"+account.startingBalance+"</th></tr>"));
+		table.append($("<tr><td colspan='4'>Starting Balance</td><td class='balanceCol'>"+account.startingBalance+"</td></tr>"));
 		var row, i;
 		for (i=0;i<account.transactions.length;i++){
 			row = makeRow(account.transactions[i]);
@@ -84,6 +84,9 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 			tr.append($("<td>"+transactionObj.amount+"</td>"));
 			tr.append($("<td>"+transactionObj.type+"</td>"));
 			tr.append($("<td>"+transactionObj.memo+"</td>"));
+			var balanceCalc = $("#mainTable tr:last-child .balanceCol").html()*1+transactionObj.amount;
+			//console.log($("#mainTable>tbody:last-child .balanceCol").html());
+			tr.append($("<td class='balanceCol'>"+balanceCalc+"</td>"));
 			return tr;
 		}
 		$("#currentBalance").html("Balance: "+account.currentBalance);

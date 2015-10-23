@@ -116,3 +116,7 @@ tr.withdrawRow {
 tr.depositRow {
   color: green;
 }
+
+#welcomePage, #accountMainPage{
+display:none;	
+}
