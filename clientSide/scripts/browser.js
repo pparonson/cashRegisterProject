@@ -27,7 +27,7 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 		if (!account){
 			var welcome=$("#welcomePage");
 			welcome.css("display","block");
-			
+
 			//send to welcome page
 			//initialize account by calling cashRegister.Account.initializeAccount(balance, acctname) and call presentAccount
 		}
@@ -41,27 +41,32 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 			});
 
 		$("#submitDeposit").click(function(){
-
+			try{
 			account.addTransaction(($("#transactionAmount").val()*1)
 						,$("#transactionDate").val()
 						,$("#accountType").val()
 						,$("#memo").val());
+			}catch(err){
+				alert(err);
+			}
 
 		});
 		$("#submitWithdraw").click(function(){
-
+			try{
 			account.addTransaction(($("#transactionAmount").val()*-1)
 						,$("#transactionDate").val()
 						,$("#accountType").val()
 						,$("#memo").val());
-
+			}catch(err){
+				alert(err);
+			}
 		});
 		$("#deleteAccount").click(function(){
 			account=null;
 			$("#accountMainPage").css("display","none");
 			$("#welcomePage").css("display","block");
-			
-			
+
+
 		});
 
 
