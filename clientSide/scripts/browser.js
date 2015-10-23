@@ -27,17 +27,18 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 		if (!account){
 			var welcome=$("#welcomePage");
 			welcome.css("display","block");
-			$("#submitWelcome").click(function(){
+			
+			//send to welcome page
+			//initialize account by calling cashRegister.Account.initializeAccount(balance, acctname) and call presentAccount
+		}
+		$("#submitWelcome").click(function(){
 				account=cashRegister.Account.initializeAccount(($("#SBalance").val()*1), $("#acctName").val());
-				welcome.css("display","none");
+				$("#welcomePage").css("display","none");
 				presentAccount();
 				account.subscribe("change", function(){
 				presentAccount();
 				});
 			});
-			//send to welcome page
-			//initialize account by calling cashRegister.Account.initializeAccount(balance, acctname) and call presentAccount
-		}
 
 		$("#submitDeposit").click(function(){
 
