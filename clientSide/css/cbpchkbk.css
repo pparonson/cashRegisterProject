@@ -19,9 +19,9 @@ body {
 		}
 		#tagName {
 			width:180%;
-			xheight:20%;
+			/*xheight:20%;*/
 			margin:center;
-			xpadding-top:1%;
+			/*xpadding-top:1%;*/
 			text-align: center;
 			/*background:#fff;*/
             background: transparent;
@@ -125,41 +125,41 @@ tr.depositRow {
 	border-spacing: 0px;
 	border:solid black 1px;
 }
-#mainTable th.balance, th.amount{
+#mainTable th.balance, th.amount {
 	width:12%;
 }
-#mainTable th.date{
+#mainTable th.date {
 	width:20%
 }
-#mainTable th{
+#mainTable th {
 	border-bottom:solid black 1px;
 }
-#mainTable th.type{
+#mainTable th.type {
 	width:18%
 }
-#mainTable td.date, #mainTable td.type, #mainTable td.amount, #mainTable td.memo{
+#mainTable td.date, #mainTable td.type, #mainTable td.amount, #mainTable td.memo {
 	border-right:solid black 1px;
 }
-#mainTable td.amount, #mainTable td.balanceCol{
+#mainTable td.amount, #mainTable td.balanceCol {
 	text-align: right;
 }
-#welcomePage, #accountMainPage{
+#welcomePage, #accountMainPage {
 display:none;
 }
-#accountMainPage input[type="date"]{
+#accountMainPage input[type="date"] {
 	height:17px;
 	vertical-align: middle;
-	xmargin-bottom:5px;
+	/*xmargin-bottom:5px;*/
 }
-#accountMainPage input{
+#accountMainPage input {
 	vertical-align:middle;
 }
-#mainTable tr:nth-child(2n){
+#mainTable tr:nth-child(2n) {
 	background-color:#e6eef0;
 }
-#accountMainPage form input{
+#accountMainPage form input {
 	font-size: 14px;
 }
-#deleteAccount{
+#deleteAccount {
 	margin-top:12px;
 }
