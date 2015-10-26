@@ -122,24 +122,37 @@ tr.depositRow {
   color: #16A808;
 }
 #mainTable {
-    background-color: white;
-	width:50%;
+    xbackground-color: white;
+	width:800px;
 	border-spacing: 0px;
-	border:solid black 1px;
+	xborder:solid black 1px;
 }
 #mainTable th.balance, th.amount {
 	width:12%;
 }
 #mainTable th.date {
-	width:20%
+	width:20%;
+}
+#mainTable th.memo{
+	width:30%;
 }
 #mainTable th {
 	border-bottom:solid black 1px;
+	border-top:solid black 1px;
+}
+#mainTable th.date{
+	border-left:solid black 1px;
 }
 #mainTable th.type {
 	width:18%
 }
 #mainTable td.date, #mainTable td.type, #mainTable td.amount, #mainTable td.memo {
+	border-right:solid black 1px;
+}
+#mainTable td.date{
+	border-left:solid black 1px;
+}
+#mainTable td.balanceCol, th.balance{
 	border-right:solid black 1px;
 }
 #mainTable td.amount, #mainTable td.balanceCol {
@@ -159,10 +172,17 @@ display:none;
 #mainTable tr:nth-child(2n) {
 	background-color:#e6eef0;
 }
+#mainTable tr:last-child td:not(.edit):not(.delete){
+	border-bottom: solid black 1px;
+}
+#mainTable tr:nth-child(2n-1){
+	background-color:white;
+}
 #accountMainPage form input {
 	font-size: 14px;
 }
-#deleteAccount {
+#deleteAccount, #editAccount {
+	width:125px;
 	margin-top:12px;
 }
 #submitDeposit{
@@ -180,9 +200,34 @@ display:none;
 	background:#cf0000;
 }
 #submitDeposit, #submitWithdraw{
-	
 	height:40px;
 	width:40px;
 	border-radius:20px;
-	
+}
+x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
+	background:blue;
+}
+#mainTable tr.selectedRow{
+	background:yellow;
+}
+#mainTable td.edit, #mainTable td.delete{
+	visibility: hidden;
+	background:yellow;
+	min-width:50px;
+	color:black;
+	text-align: center;
+}
+#mainTable td.delete{
+	min-width:100px;
+}
+#mainTable td.edit:hover{
+	background:green;
+	cursor:pointer;
+}
+#mainTable td.delete:hover{
+	background:red;
+	cursor: pointer;
+}
+#mainTable tr.selectedRow td.edit, #mainTable tr.selectedRow td.delete{
+	visibility: visible;
 }

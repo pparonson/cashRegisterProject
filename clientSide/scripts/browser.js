@@ -10,6 +10,7 @@ requirejs.config({
 require(["cashRegister", "jquery"], function (cashRegister, $) {
 //var cashRegister = require('cashRegister');
 	var account;
+	var selectedRow=null;
 	$(document).ready(function(){
 		//make a decision
 		var localStorageJson = localStorage.getItem("Account");
@@ -65,9 +66,43 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 			account=null;
 			$("#accountMainPage").css("display","none");
 			$("#welcomePage").css("display","block");
-
-
 		});
+		$("#editAccount").click(function(){
+			$("#mainTable td:not(.edit):not(.delete)").attr("contenteditable","true");
+			$("#mainTable tr:has(td)").addClass("editableRow");
+		})
+		
+		
+		$("#mainTable td").focus(function(){
+			if (selectedRow!=null&&selectedRow.data("tID")!==$(this).parent().data("tID")){
+				selectedRow.removeClass("selectedRow");
+				console.log("logic to reset")
+				console.log(selectedRow);
+				console.log($(this).parent())
+			}
+			selectedRow=$(this).parent();
+			
+			$(this).parent().addClass("selectedRow");
+			var tracker = $(this).parent().html();
+			$(this).parent().find(".edit").html("save").off().click(
+				function(){
+					account.editTransaction()
+				}
+			);
+			$(this).parent().find(".delete").html("delete row").off().click(
+				function(){
+					alert("delete");
+				}
+			);
+			
+				$("#mainTable td").blur(function(evt){
+					
+					//$(this).parent().html(tracker);
+	
+				})
+			
+			
+		})
 
 
 
@@ -77,7 +112,7 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 		var table=$("#mainTable");
 		table.empty();
 		table.append($("<tr><th class='date'>Date</th><th class='type'>Type</th><th class='memo'>Memo</th><th class='amount'>Amount</th><th class='balance'>Balance</th></tr>"));
-		table.append($("<tr><td class='date'></td><td class='type'></td><td class='memo'></td><td class='amount'></td><td class='balanceCol'>"+account.startingBalance+"</td></tr>"));
+		table.append($("<tr><td class='date'></td><td class='type'></td><td class='memo'></td><td class='amount'></td><td class='balanceCol'>"+account.startingBalance+"</td><td class='edit'></td></tr>"));
 		var row, i;
 		for (i=0;i<account.transactions.length;i++){
 			row = makeRow(account.transactions[i]);
@@ -93,13 +128,18 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 			else{
 				tr.addClass("depositRow");
 			}
+			tr.data("tID", transactionObj.id);
+			console.log(tr.data("tID"));
+			console.log(transactionObj.id)
 			tr.append($("<td class='date'>"+transactionObj.date+"</td>"));
 			tr.append($("<td class='type'>"+transactionObj.type+"</td>"));
 			tr.append($("<td class='memo'>"+transactionObj.memo+"</td>"));
-			tr.append($("<td class='amount'>"+transactionObj.amount+"</td>"));
+			tr.append($("<td class='amount'>"+transactionObj.amount+"</td>"));			
 			var balanceCalc = $("#mainTable tr:last-child .balanceCol").html()*1+transactionObj.amount;
 			//console.log($("#mainTable>tbody:last-child .balanceCol").html());
 			tr.append($("<td class='balanceCol'>"+balanceCalc+"</td>"));
+			tr.append($("<td class='edit'></td>"));
+			tr.append($("<td class='delete'></td>"));
 			return tr;
 		}
 		$("#currentBalance").html("Balance: "+account.currentBalance);
