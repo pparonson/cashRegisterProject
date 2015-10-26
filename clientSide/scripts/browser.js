@@ -103,36 +103,7 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 		})
 		
 		
-		$("#mainTable td").focus(function(){
-			if (selectedRow!=null&&selectedRow.data("tID")!==$(this).parent().data("tID")){
-				selectedRow.removeClass("selectedRow");
-				console.log("logic to reset")
-				console.log(selectedRow);
-				console.log($(this).parent())
-			}
-			selectedRow=$(this).parent();
-			
-			$(this).parent().addClass("selectedRow");
-			var tracker = $(this).parent().html();
-			$(this).parent().find(".edit").html("save").off().click(
-				function(){
-					account.editTransaction()
-				}
-			);
-			$(this).parent().find(".delete").html("delete row").off().click(
-				function(){
-					alert("delete");
-				}
-			);
-			
-				$("#mainTable td").blur(function(evt){
-					
-					//$(this).parent().html(tracker);
-	
-				})
-			
-			
-		})
+		
 
 
 
@@ -173,7 +144,40 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 			return tr;
 		}
 		$("#currentBalance").html("Balance: "+account.currentBalance);
-
+		$("#mainTable td:not(.edit):not(.delete)").focus(function(){
+			if (selectedRow!=null&&selectedRow.data("tID")!==$(this).parent().data("tID")){
+				selectedRow.removeClass("selectedRow");
+				console.log("logic to reset")
+				console.log(selectedRow);
+				console.log($(this).parent())
+			}
+			selectedRow=$(this).parent();
+			
+			$(this).parent().addClass("selectedRow");
+			var tracker = $(this).parent().html();
+			$(this).parent().find(".edit").html("save").off().click(
+				function(evt){
+					var row=$(evt.target).parent();
+					var amt=row.find("td.amount").html()*1;
+					var date=row.find("td.date").html();
+					var type=row.find("td.type").html();
+					var memo=row.find("td.memo").html();
+					var id = row.data("tID");
+					console.log(amt +date+type+memo+id);
+					account.editTransaction(id, amt, date, type, memo);
+				}
+			);
+			$(this).parent().find(".delete").html("delete row").off().click(
+				function(evt){
+					alert("delete"+$(evt.target).parent().data("tID"));
+					account.deleteTransaction($(evt.target).parent().data("tID"));
+				}
+			);
+			
+				
+			
+			
+		})
 	}
 
 	$(window).unload(function(){
