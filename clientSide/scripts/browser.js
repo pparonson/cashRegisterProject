@@ -101,8 +101,8 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 			$("#mainTable td:not(.edit):not(.delete)").attr("contenteditable","true");
 			$("#mainTable tr:has(td)").addClass("editableRow");
 		})
-		
-		
+
+
 		$("#mainTable td").focus(function(){
 			if (selectedRow!=null&&selectedRow.data("tID")!==$(this).parent().data("tID")){
 				selectedRow.removeClass("selectedRow");
@@ -111,7 +111,7 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 				console.log($(this).parent())
 			}
 			selectedRow=$(this).parent();
-			
+
 			$(this).parent().addClass("selectedRow");
 			var tracker = $(this).parent().html();
 			$(this).parent().find(".edit").html("save").off().click(
@@ -124,14 +124,14 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 					alert("delete");
 				}
 			);
-			
+
 				$("#mainTable td").blur(function(evt){
-					
+
 					//$(this).parent().html(tracker);
-	
+
 				})
-			
-			
+
+
 		})
 
 
@@ -164,7 +164,7 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 			tr.append($("<td class='date'>"+transactionObj.date+"</td>"));
 			tr.append($("<td class='type'>"+transactionObj.type+"</td>"));
 			tr.append($("<td class='memo'>"+transactionObj.memo+"</td>"));
-			tr.append($("<td class='amount'>"+transactionObj.amount+"</td>"));			
+			tr.append($("<td class='amount'>"+transactionObj.amount+"</td>"));
 			var balanceCalc = $("#mainTable tr:last-child .balanceCol").html()*1+transactionObj.amount;
 			//console.log($("#mainTable>tbody:last-child .balanceCol").html());
 			tr.append($("<td class='balanceCol'>"+balanceCalc+"</td>"));
