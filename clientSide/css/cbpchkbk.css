@@ -4,34 +4,36 @@ body {
   background-color: #b0c4de;
   background-attachment: fixed;
   background-size: cover;
-
+  margin:25px;
   /*background-size: 1024px 768px;
   width: 1024px;
   height: 768px;*/
 
 }
 
-		#introMessage {
-			/*background-image:url(chicago.jpg);*/
-			width:100px;
-			height:100px;
-			/*float:left;*/
-		}
-		#tagName {
-			width:180%;
-			/*xheight:20%;*/
-			margin:center;
-			/*xpadding-top:1%;*/
-			text-align: center;
-			/*background:#fff;*/
-            background: transparent;
-			opacity:0.2;
-			filter:alpha(opacity=20);
-		}
-		#introMessage:hover #tagName {
-			opacity:0.9;
-			filter:alpha(opacity=90);
-		}
+#introMessage {
+	/*background-image:url(chicago.jpg);*/
+	xwidth:100px;
+	xheight:100px;
+	text-align: left;
+	/*float:left;*/
+}
+
+#tagName {
+	xwidth:180%;
+	/*xheight:20%;*/
+	margin:center;
+	/*xpadding-top:1%;*/
+	xtext-align: center;
+	/*background:#fff;*/
+	background: transparent;
+	opacity:0.2;
+	filter:alpha(opacity=20);
+}
+#introMessage:hover #tagName {
+	opacity:0.9;
+	filter:alpha(opacity=90);
+}
 
 
 .myButton {
@@ -162,4 +164,25 @@ display:none;
 }
 #deleteAccount {
 	margin-top:12px;
+}
+#submitDeposit{
+	background:#16A808;
+	border:solid seagreen 1px;
+}
+#submitDeposit:hover{
+	background:green;
+}
+#submitWithdraw{
+	background:red;
+	border:solid #cf0000 1px;
+}
+#submitWithdraw:hover{
+	background:#cf0000;
+}
+#submitDeposit, #submitWithdraw{
+	
+	height:40px;
+	width:40px;
+	border-radius:20px;
+	
 }
