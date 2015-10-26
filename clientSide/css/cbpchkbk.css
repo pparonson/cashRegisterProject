@@ -13,33 +13,21 @@ body {
 
 #introMessage {
 	/*background-image:url(chicago.jpg);*/
-	xwidth:100px;
-	xheight:100px;
+	/*xwidth:100px;*/
+	/*xheight:100px;*/
 	text-align: left;
 	/*float:left;*/
 }
 
-#tagName {
-	xwidth:180%;
-	/*xheight:20%;*/
-	margin:center;
-	/*xpadding-top:1%;*/
-	xtext-align: center;
-	/*background:#fff;*/
-	background: transparent;
-	opacity:0.2;
-	filter:alpha(opacity=20);
-}
 #introMessage:hover #tagName {
 	opacity:0.9;
 	filter:alpha(opacity=90);
 }
 
-
 .myButton {
-	-moz-box-shadow: 3px 4px 0px 0px #899599;
-	-webkit-box-shadow: 3px 4px 0px 0px #899599;
-	box-shadow: 3px 4px 0px 0px #899599;
+	-moz-box-shadow: 3px 4px 0 0 #899599;
+	-webkit-box-shadow: 3px 4px 0 0 #899599;
+	box-shadow: 3px 4px 0 0 #899599;
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #bab1ba));
 	background:-moz-linear-gradient(top, #ededed 5%, #bab1ba 100%);
 	background:-webkit-linear-gradient(top, #ededed 5%, #bab1ba 100%);
@@ -59,7 +47,7 @@ body {
 	font-size:11px;
 	padding:7px 25px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #e1e2ed;
+	text-shadow:0 1px 0px #e1e2ed;
 }
 .myButton:hover {
 	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bab1ba), color-stop(1, #ededed));
@@ -81,7 +69,7 @@ body {
   box-shadow: inset 1px 1px 2px 0 #707070;
   transition: box-shadow 0.3s;
 }
-.style-5 input[type="number"]:focus,
+
 .style-5 input[type="number"].focus {
   box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
@@ -91,27 +79,18 @@ body {
   box-shadow: inset 1px 1px 2px 0 #707070;
   transition: box-shadow 0.3s;
 }
-.style-5 input[type="text"]:focus,
+
 .style-5 input[type="text"].focus {
   box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
-.style-5 input[type="date"] {
-  padding: 10px;
-  border: solid 1px black;
-  box-shadow: inset 1px 1px 2px 0 #707070;
-  transition: box-shadow 0.3s;
-}
-.style-5 input[type="date"]:focus,
-.style-5 input[type="date"].focus {
-  box-shadow: inset 1px 1px 2px 0 #c9c9c9;
-}
+
 .style-5 input[list="transactionTypes"] {
   padding: 10px;
   border: solid 1px black;
   box-shadow: inset 1px 1px 2px 0 #707070;
   transition: box-shadow 0.3s;
 }
-.style-5 input[list="transactionTypes"]:focus,
+
 .style-5 input[list="transactionTypes"].focus {
   box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
@@ -148,11 +127,21 @@ tr.depositRow {
 #welcomePage, #accountMainPage {
 display:none;
 }
-#accountMainPage input[type="date"] {
+
+#datepicker {
 	height:17px;
 	vertical-align: middle;
-	/*xmargin-bottom:5px;*/
+    padding: 10px;
+    border: solid 1px black;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
 }
+
+#datepicker.focus {
+    box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
+
+
 #accountMainPage input {
 	vertical-align:middle;
 }
@@ -180,9 +169,9 @@ display:none;
 	background:#cf0000;
 }
 #submitDeposit, #submitWithdraw{
-	
+
 	height:40px;
 	width:40px;
 	border-radius:20px;
-	
+
 }

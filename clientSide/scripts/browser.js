@@ -3,15 +3,45 @@ requirejs.config({
 	paths:{
 		cashRegister: "../../node_modules/cashRegister/cashRegister",
 		jquery: "../../node_modules/jquery/dist/jquery.min",
+		jqueryui: "./jquery-ui.min",
 		subscribers: "../../node_modules/subscribers/subscribers"
 	}
 });
 
-require(["cashRegister", "jquery"], function (cashRegister, $) {
+require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 //var cashRegister = require('cashRegister');
 	var account;
 	$(document).ready(function(){
-		//make a decision
+		//jQuery datepicker
+		$(function() {
+		  $( "#datepicker" ).datepicker({
+			  dateFormat: "yy-mm-dd"
+		  });
+
+		});
+		function getCurrentDate() {
+		    var currentDate = new Date(),
+		        //add 1 to 0 based index month
+		        currentMonth = '' + (currentDate.getMonth() + 1),
+		        currentDay = '' + currentDate.getDate(),
+		        currentYear = currentDate.getFullYear();
+
+		    if (currentMonth.length < 2) {
+		        currentMonth = '0' + currentMonth;
+		    }
+		    if (currentDay.length < 2) {
+		        currentDay = '0' + currentDay;
+		    }
+
+		    currentDate = [currentYear, currentMonth,
+				currentDay].join('-');
+		    // console.log(currentDate);
+		    return currentDate;
+		}
+		//getElementById translated to jQuery
+		//document.getElementById("transactionDate").value = getCurrentDate();
+		$("#datepicker").val(getCurrentDate);
+		//make a decision branch
 		var localStorageJson = localStorage.getItem("Account");
 		if (localStorageJson && localStorageJson!== "undefined" && localStorageJson!== "null"){
 			$("#welcomePage").css("display","none");	//temporary
@@ -43,7 +73,7 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 		$("#submitDeposit").click(function(){
 			try{
 			account.addTransaction(($("#transactionAmount").val()*1)
-						,$("#transactionDate").val()
+						,$("#datepicker").val()
 						,$("#accountType").val()
 						,$("#memo").val());
 			}catch(err){
@@ -54,7 +84,7 @@ require(["cashRegister", "jquery"], function (cashRegister, $) {
 		$("#submitWithdraw").click(function(){
 			try{
 			account.addTransaction(($("#transactionAmount").val()*-1)
-						,$("#transactionDate").val()
+						,$("#datepicker").val()
 						,$("#accountType").val()
 						,$("#memo").val());
 			}catch(err){

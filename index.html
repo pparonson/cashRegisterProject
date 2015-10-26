@@ -3,8 +3,11 @@
     <head>
         <meta charset="utf-8">
         <!-- <link rel="stylesheet" type="text/css" href="clientSide/css/reset.css">  -->
+        <link rel="stylesheet" type="text/css" href="clientSide/css/cbpchkbk.css">
         <link rel="stylesheet" type="text/css"
-            href="clientSide/css/cbpchkbk.css">
+            href="clientSide/jQueryUI/jquery-ui.theme.min.css">
+        <link rel="stylesheet" type="text/css"
+            href="clientSide/jQueryUI/jquery-ui.structure.min.css">
         <script data-main="clientSide/scripts/browser.js"
             src="clientSide/scripts/require.js">
         </script>
@@ -18,8 +21,6 @@
             <div id="welcomePage">
                 <h3  id="systemName">Account Manager System</h3>
                 <form action="" class="style-5" method="post">
-                    <!-- <input type="text" name="fName"  id="fName" placeholder="First Name">
-                    <input type="text" name="lName" id="lName" placeholder="Last Name"> -->
                     <input type="number" name="SBalance" id="SBalance"
                         placeholder="Starting Balance">
                     <input type="text" name="acctType" id="acctType"
@@ -32,8 +33,10 @@
             </div>
             <div class="style-5" id="accountMainPage">
             <form action=""  method="post">
-                <input type="date" name="date" id="transactionDate" value="2015-10-23">
-                <input list="transactionTypes" name="type" id="accountType" placeholder="Transaction Type">
+                <input name="date" id="datepicker"
+                    placeholder="yyyy-mm-dd">
+                <input list="transactionTypes" name="type" id="accountType"
+                    placeholder="Transaction Type">
                 <datalist  id="transactionTypes">
                     <option value="Credit Card"></option>
                     <option value="Check #"></option>
@@ -42,9 +45,10 @@
                     <option value="Cash"></option>
                 </datalist>
                 <input type="text" name="memo" id="memo" placeholder="Memo">
-                <input type="number" name="amount" id="transactionAmount" placeholder="Transaction Amount ">
-                <input type="button" value="+" id="submitDeposit">
+                <input type="number" name="amount" id="transactionAmount"
+                    placeholder="Transaction Amount ">
                 <input type="button" value="&#x2013;" id="submitWithdraw">
+                <input type="button" value="+" id="submitDeposit">
             </form>
             <h1 id="currentBalance">Balance</h1>
             <table id="mainTable">
