@@ -8,18 +8,19 @@ requirejs.config({
 	}
 });
 
-require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
+require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 //var cashRegister = require('cashRegister');
 	var account;
-	var selectedRow=null;
+	var selectedRow = null;
 	$(document).ready(function(){
 		//jQuery datepicker
 		$(function() {
 		  $( "#datepicker" ).datepicker({
 			  dateFormat: "yy-mm-dd"
-		  });
+		  });//end: fn
 
-		});
+	  });//end: fn
+
 		function getCurrentDate() {
 		    var currentDate = new Date(),
 		        //add 1 to 0 based index month
@@ -38,145 +39,170 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 				currentDay].join('-');
 		    // console.log(currentDate);
 		    return currentDate;
-		}
-		//getElementById translated to jQuery
-		//document.getElementById("transactionDate").value = getCurrentDate();
+		}//end: fn
+
+		/*
+		getElementById translated to jQuery
+		document.getElementById("transactionDate").value = getCurrentDate();
+		 */
 		$("#datepicker").val(getCurrentDate);
 		//make a decision branch
 		var localStorageJson = localStorage.getItem("Account");
-		if (localStorageJson && localStorageJson!== "undefined" && localStorageJson!== "null"){
-			$("#welcomePage").css("display","none");	//temporary
-			console.log(typeof localStorageJson);
-			console.log(localStorageJson);
-			var obj = JSON.parse(localStorageJson);
-			account = cashRegister.Account.loadJSON(obj);
-			presentAccount();
-			account.subscribe("change", function(){
-			presentAccount();
+		if (localStorageJson && localStorageJson !== "undefined" &&
+		localStorageJson !== "null"){
+				$("#welcomePage").css("display","none");	//temporary
+				console.log(typeof localStorageJson);
+				console.log(localStorageJson);
+				var obj = JSON.parse(localStorageJson);
+				account = cashRegister.Account.loadJSON(obj);
+				presentAccount();
+				account.subscribe("change", function() {
+				presentAccount();
 			});
-		}
+		}//end: if
+
 		if (!account){
-			var welcome=$("#welcomePage");
+			var welcome = $("#welcomePage");
 			welcome.css("display","block");
+		}//end: if
 
-			//send to welcome page
-			//initialize account by calling cashRegister.Account.initializeAccount(balance, acctname) and call presentAccount
-		}
-		$("#submitWelcome").click(function(){
-				account=cashRegister.Account.initializeAccount(($("#SBalance").val()*1), $("#acctName").val());
-				$("#welcomePage").css("display","none");
+		/*
+		send to welcome page
+		initialize account by calling cashRegister.Account.initializeAccount
+			(balance, acctname) and call presentAccount
+		 */
+		$("#submitWelcome").click(function() {
+			account = cashRegister.Account.initializeAccount(
+				($("#SBalance").val() * 1), $("#acctName").val());
+			$("#welcomePage").css("display","none");
+			presentAccount();
+			account.subscribe("change", function() {
 				presentAccount();
-				account.subscribe("change", function(){
-				presentAccount();
-				});
-			});
+			});//end: fn
+		});
 
-		$("#submitDeposit").click(function(){
-			try{
-			account.addTransaction(($("#transactionAmount").val()*1)
+		$("#submitDeposit").click(function() {
+				try{
+					account.addTransaction(
+						($("#transactionAmount").val() * 1)
 						,$("#datepicker").val()
 						,$("#accountType").val()
-						,$("#memo").val());
+						,$("#memo").val()
+					);
 			}catch(err){
 				alert(err);
 			}
 
-		});
-		$("#submitWithdraw").click(function(){
+		});//end: fn
+
+		$("#submitWithdraw").click(function() {
 			try{
-			account.addTransaction(($("#transactionAmount").val()*-1)
-						,$("#datepicker").val()
-						,$("#accountType").val()
-						,$("#memo").val());
+				account.addTransaction(
+					($("#transactionAmount").val()*-1)
+					,$("#datepicker").val()
+					,$("#accountType").val()
+					,$("#memo").val()
+				);
 			}catch(err){
 				alert(err);
 			}
-		});
-		$("#deleteAccount").click(function(){
-			account=null;
+		});//end: fn
+
+		$("#deleteAccount").click(function() {
+			account = null;
 			$("#accountMainPage").css("display","none");
 			$("#welcomePage").css("display","block");
 		});
-		$("#editAccount").click(function(){
+
+		$("#editAccount").click(function() {
 			$("#mainTable td:not(.edit):not(.delete)").attr("contenteditable","true");
 			$("#mainTable tr:has(td)").addClass("editableRow");
-		})
+		});
 
 
-		$("#mainTable td").focus(function(){
-			if (selectedRow!=null&&selectedRow.data("tID")!==$(this).parent().data("tID")){
+		$("#mainTable td").focus(function() {
+			if (selectedRow !== null && selectedRow.data("tID") !== $(this).parent().data("tID")) {
 				selectedRow.removeClass("selectedRow");
-				console.log("logic to reset")
+				console.log("logic to reset");
 				console.log(selectedRow);
-				console.log($(this).parent())
-			}
+				console.log($(this).parent());
+			}//end: if
 			selectedRow=$(this).parent();
 
 			$(this).parent().addClass("selectedRow");
 			var tracker = $(this).parent().html();
 			$(this).parent().find(".edit").html("save").off().click(
 				function(){
-					account.editTransaction()
+					account.editTransaction();
 				}
 			);
 			$(this).parent().find(".delete").html("delete row").off().click(
-				function(){
+				function() {
 					alert("delete");
 				}
 			);
 
-				$("#mainTable td").blur(function(evt){
+				$("#mainTable td").blur(function(evt) {
 
 					//$(this).parent().html(tracker);
 
-				})
+				});//end: fn
 
 
-		})
+		});//end: fn
 
 
 
 	});
-	function presentAccount(){
+	function presentAccount() {
 		$("#accountMainPage").css("display","block");
-		var table=$("#mainTable");
+		var table = $("#mainTable");
 		table.empty();
-		table.append($("<tr><th class='date'>Date</th><th class='type'>Type</th><th class='memo'>Memo</th><th class='amount'>Amount</th><th class='balance'>Balance</th></tr>"));
-		table.append($("<tr><td class='date'></td><td class='type'></td><td class='memo'></td><td class='amount'></td><td class='balanceCol'>"+account.startingBalance+"</td><td class='edit'></td></tr>"));
+		table.append($("<tr><th class='date'>Date</th>"
+					+ "<th class='type'>Type</th>"
+					+ "<th class='memo'>Memo</th>"
+					+ "<th class='amount'>Amount</th>"
+					+ "<th class='balance'>Balance</th></tr>"));
+		table.append($("<tr><td class='date'></td>"
+					+ "<td class='type'></td>"
+					+ "<td class='memo'></td>"
+					+ "<td class='amount'></td>"
+					+ "<td class='balanceCol'>" + account.startingBalance + "</td>"
+					+ "<td class='edit'></td></tr>"));
 		var row, i;
-		for (i=0;i<account.transactions.length;i++){
+		for (i = 0; i < account.transactions.length; i += 1){
 			row = makeRow(account.transactions[i]);
 			table.append(row);
+		}//end: for
 
-		}
-		function makeRow(transactionObj){
-
+		function makeRow(transactionObj) {
 			var tr = $("<tr></tr>");
-			if (transactionObj.amount<0){
+			if (transactionObj.amount<0) {
 				tr.addClass("withdrawRow");
-			}
-			else{
+			} else{
 				tr.addClass("depositRow");
-			}
+			}//end: if
 			tr.data("tID", transactionObj.id);
 			console.log(tr.data("tID"));
-			console.log(transactionObj.id)
-			tr.append($("<td class='date'>"+transactionObj.date+"</td>"));
-			tr.append($("<td class='type'>"+transactionObj.type+"</td>"));
-			tr.append($("<td class='memo'>"+transactionObj.memo+"</td>"));
-			tr.append($("<td class='amount'>"+transactionObj.amount+"</td>"));
-			var balanceCalc = $("#mainTable tr:last-child .balanceCol").html()*1+transactionObj.amount;
+			console.log(transactionObj.id);
+			tr.append($("<td class='date'>" + transactionObj.date + "</td>"));
+			tr.append($("<td class='type'>" + transactionObj.type + "</td>"));
+			tr.append($("<td class='memo'>" + transactionObj.memo + "</td>"));
+			tr.append($("<td class='amount'>" + transactionObj.amount + "</td>"));
+			var balanceCalc = $("#mainTable tr:last-child .balanceCol").html() * 1
+				+ transactionObj.amount;
 			//console.log($("#mainTable>tbody:last-child .balanceCol").html());
-			tr.append($("<td class='balanceCol'>"+balanceCalc+"</td>"));
+			tr.append($("<td class='balanceCol'>" + balanceCalc+"</td>"));
 			tr.append($("<td class='edit'></td>"));
 			tr.append($("<td class='delete'></td>"));
 			return tr;
-		}
-		$("#currentBalance").html("Balance: "+account.currentBalance);
+		}//end: fn makeRow()
 
-	}
+		$("#currentBalance").html("Balance: " + account.currentBalance);
+
+	}//end: fn presentAccount()
 
 	$(window).unload(function(){
 		localStorage.setItem("Account", JSON.stringify(account));
 	});
-});
+});//end: fn require
