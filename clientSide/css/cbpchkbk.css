@@ -211,7 +211,7 @@ x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
 	text-align: center;
 }
 #mainTable td.delete{
-	min-width:100px;
+	min-width:102px;
 }
 #mainTable td.edit:hover{
 	background:green;

@@ -134,7 +134,8 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 					+ "<td class='memo'></td>"
 					+ "<td class='amount'></td>"
 					+ "<td class='balanceCol'>" + account.startingBalance + "</td>"
-					+ "<td class='edit'></td></tr>"));
+					+ "<td class='edit'></td>"
+					+ "<td class='delete first'></td></tr>"));
 		var row, i;
 		for (i = 0; i < account.transactions.length; i += 1){
 			row = makeRow(account.transactions[i]);
@@ -194,7 +195,8 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 					account.editTransaction(id, amt, date, type, memo);
 				}//end: fn
 			);
-			$(this).parent().find(".delete").html("delete row").off().click(
+			
+			$(this).parent().find(".delete:not(.first)").html("delete row").off().click(
 				function(evt){
 					alert("delete"+$(evt.target).parent().data("tID"));
 					account.deleteTransaction($(evt.target).parent().data("tID"));
