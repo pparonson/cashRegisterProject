@@ -21,25 +21,7 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 
 	  });//end: fn
 
-		function getCurrentDate() {
-		    var currentDate = new Date(),
-		        //add 1 to 0 based index month
-		        currentMonth = '' + (currentDate.getMonth() + 1),
-		        currentDay = '' + currentDate.getDate(),
-		        currentYear = currentDate.getFullYear();
 
-		    if (currentMonth.length < 2) {
-		        currentMonth = '0' + currentMonth;
-		    }
-		    if (currentDay.length < 2) {
-		        currentDay = '0' + currentDay;
-		    }
-
-		    currentDate = [currentYear, currentMonth,
-				currentDay].join('-');
-		    // console.log(currentDate);
-		    return currentDate;
-		}//end: fn
 
 		/*
 		getElementById translated to jQuery
@@ -115,12 +97,37 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 		});
 
 		$("#editAccount").click(function() {
-			$("#mainTable td:not(.edit):not(.delete)").attr("contenteditable","true");
-			$("#mainTable tr:has(td)").addClass("editableRow");
+			$("#mainTable td:not(.edit):not(.delete):not(.balanceCol):not(.first),"
+			+" #mainTable td.balanceCol.first").attr("contenteditable","true");
+			//$("#mainTable td.balanceCol.first").attr("contenteditable","true");
+			//$("#mainTable tr:has(td)").addClass("editableRow");
 		});
 
 	});//end: fn document.ready()
+	function getCurrentDate() {
+		    var currentDate = new Date(),
+		        //add 1 to 0 based index month
+		        currentMonth = '' + (currentDate.getMonth() + 1),
+		        currentDay = '' + currentDate.getDate(),
+		        currentYear = currentDate.getFullYear();
+
+		    if (currentMonth.length < 2) {
+		        currentMonth = '0' + currentMonth;
+		    }
+		    if (currentDay.length < 2) {
+		        currentDay = '0' + currentDay;
+		    }
+
+		    currentDate = [currentYear, currentMonth,
+				currentDay].join('-');
+		    // console.log(currentDate);
+		    return currentDate;
+	}//end: fn
 	function presentAccount() {
+		$("#datepicker").val(getCurrentDate);
+		console.log($("#accountType, #memo, #transactionAmount"));
+		$("#accountType, #memo, #transactionAmount").val("");
+		selectedRow=null;
 		$("#accountMainPage").css("display","block");
 		var table = $("#mainTable");
 		table.empty();
@@ -129,12 +136,12 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 					+ "<th class='memo'>Memo</th>"
 					+ "<th class='amount'>Amount</th>"
 					+ "<th class='balance'>Balance</th></tr>"));
-		table.append($("<tr><td class='date'></td>"
-					+ "<td class='type'></td>"
-					+ "<td class='memo'></td>"
-					+ "<td class='amount'></td>"
-					+ "<td class='balanceCol'>" + account.startingBalance + "</td>"
-					+ "<td class='edit'></td>"
+		table.append($("<tr><td class='date first'></td>"
+					+ "<td class='type first'></td>"
+					+ "<td class='memo first'></td>"
+					+ "<td class='amount first'></td>"
+					+ "<td class='balanceCol first'>" + account.startingBalance + "</td>"
+					+ "<td class='edit first'></td>"
 					+ "<td class='delete first'></td></tr>"));
 		var row, i;
 		for (i = 0; i < account.transactions.length; i += 1){
@@ -175,7 +182,7 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 				selectedRow.find("td.date").html(selectedRow.date);
 				selectedRow.find("td.type").html(selectedRow.type);
 				selectedRow.find("td.memo").html(selectedRow.memo);
-				
+				selectedRow.find("td.balanceCol").html(selectedRow.balance)
 				console.log("logic to reset");
 				console.log(selectedRow);
 				console.log($(this).parent());
@@ -190,11 +197,14 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 				selectedRow.date=selectedRow.find("td.date").html();
 				selectedRow.type=selectedRow.find("td.type").html();
 				selectedRow.memo=selectedRow.find("td.memo").html();
+				selectedRow.balance=selectedRow.find("td.balanceCol").html();
+				
+				selectedRow.addClass("selectedRow");
 			}
 				
-			$(this).parent().addClass("selectedRow");
-			var tracker = $(this).parent().html();
-			$(this).parent().find(".edit").html("save").off().click(
+			
+			
+			selectedRow.find(".edit:not(.first)").html("save").off().click(
 				function(evt){
 					var row=$(evt.target).parent();
 					var amt=row.find("td.amount").html()*1;
@@ -206,10 +216,22 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 					account.editTransaction(id, amt, date, type, memo);
 				}//end: fn
 			);
-
-			$(this).parent().find(".delete:not(.first)").html("delete row").off().click(
+			selectedRow.find(".edit.first").html("save").off().click(
 				function(evt){
-					alert("delete"+$(evt.target).parent().data("tID"));
+					var row=$(evt.target).parent();
+					var balance=row.find("td.balanceCol").html();
+					if (!isNaN(Number(balance))){
+						account.startingBalance=Number(balance);
+						account.notify("change");
+						presentAccount();
+					}
+						
+				}
+			)
+			
+			
+			selectedRow.find(".delete:not(.first)").html("delete row").off().click(
+				function(evt){
 					account.deleteTransaction($(evt.target).parent().data("tID"));
 				}//end: fn
 			);
