@@ -14,12 +14,14 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 	var selectedRow = null;
 	$(document).ready(function(){
 		//jQuery datepicker
-		$(function() {
-		  $( "#datepicker" ).datepicker({
-			  dateFormat: "yy-mm-dd"
-		  });//end: fn
+		$( "#datepicker" ).datepicker({
+			dateFormat: "yy-mm-dd"
+		});//end: fn
 
-	  });//end: fn
+		$( "#accountType" ).autocomplete({
+			source: ["Cash", "Credit Card", "Check #"
+			, "Wire Transfer", "Direct Deposit"]
+		});//end: fn
 
 
 
@@ -71,7 +73,7 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 						,$("#accountType").val()
 						,$("#memo").val()
 					);
-			}catch(err){
+			}catch(err) {
 				alert(err);
 			}
 
@@ -173,20 +175,20 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 		}//end: fn makeRow()
 
 		$("#currentBalance").html("Balance: " + account.currentBalance);
-		
+
 		$("#mainTable td:not(.edit):not(.delete)").focus(function(evt){
-	
+
 			if (selectedRow !== null && selectedRow.data("tID") !== $(this).parent().data("tID")){//only reached when switching selected row
 				selectedRow.removeClass("selectedRow");
 				selectedRow.find("td.amount").html(selectedRow.amount);
 				selectedRow.find("td.date").html(selectedRow.date);
 				selectedRow.find("td.type").html(selectedRow.type);
 				selectedRow.find("td.memo").html(selectedRow.memo);
-				selectedRow.find("td.balanceCol").html(selectedRow.balance)
+				selectedRow.find("td.balanceCol").html(selectedRow.balance);
 				console.log("logic to reset");
 				console.log(selectedRow);
 				console.log($(this).parent());
-				
+
 
 			}//end: if
 
@@ -198,12 +200,12 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 				selectedRow.type=selectedRow.find("td.type").html();
 				selectedRow.memo=selectedRow.find("td.memo").html();
 				selectedRow.balance=selectedRow.find("td.balanceCol").html();
-				
+
 				selectedRow.addClass("selectedRow");
 			}
-				
-			
-			
+
+
+
 			selectedRow.find(".edit:not(.first)").html("save").off().click(
 				function(evt){
 					var row=$(evt.target).parent();
@@ -225,11 +227,11 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 						account.notify("change");
 						presentAccount();
 					}
-						
+
 				}
-			)
-			
-			
+			);
+
+
 			selectedRow.find(".delete:not(.first)").html("delete row").off().click(
 				function(evt){
 					account.deleteTransaction($(evt.target).parent().data("tID"));
