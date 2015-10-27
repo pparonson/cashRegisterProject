@@ -101,9 +101,12 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 			$("#mainTable td:not(.edit):not(.delete)").attr("contenteditable","true");
 			$("#mainTable tr:has(td)").addClass("editableRow");
 		})
+
+
+
+
 		
-		
-		
+
 
 
 
@@ -135,7 +138,7 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 			tr.append($("<td class='date'>"+transactionObj.date+"</td>"));
 			tr.append($("<td class='type'>"+transactionObj.type+"</td>"));
 			tr.append($("<td class='memo'>"+transactionObj.memo+"</td>"));
-			tr.append($("<td class='amount'>"+transactionObj.amount+"</td>"));			
+			tr.append($("<td class='amount'>"+transactionObj.amount+"</td>"));
 			var balanceCalc = $("#mainTable tr:last-child .balanceCol").html()*1+transactionObj.amount;
 			//console.log($("#mainTable>tbody:last-child .balanceCol").html());
 			tr.append($("<td class='balanceCol'>"+balanceCalc+"</td>"));
@@ -144,7 +147,13 @@ require(["cashRegister", "jquery", "jqueryui"], function (cashRegister, $) {
 			return tr;
 		}
 		$("#currentBalance").html("Balance: "+account.currentBalance);
-		$("#mainTable td:not(.edit):not(.delete)").focus(function(){
+		$("#mainTable td:not(.edit):not(.delete)").focus(function(evt){
+			if(evt.relatedTarget===null){
+				console.log(evt);
+				console.log("mfing victory")
+				//$("#editAccount").focus();
+				//return;
+			}
 			if (selectedRow!=null&&selectedRow.data("tID")!==$(this).parent().data("tID")){
 				selectedRow.removeClass("selectedRow");
 				console.log("logic to reset")
