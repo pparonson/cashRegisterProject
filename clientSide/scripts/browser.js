@@ -166,21 +166,32 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 		}//end: fn makeRow()
 
 		$("#currentBalance").html("Balance: " + account.currentBalance);
+		
 		$("#mainTable td:not(.edit):not(.delete)").focus(function(evt){
-			if(evt.relatedTarget===null){
-				console.log(evt);
-				console.log("mfing victory");
-				//$("#editAccount").focus();
-				//return;
-			}//end: if
-			if (selectedRow !== null && selectedRow.data("tID") !== $(this).parent().data("tID")){
+	
+			if (selectedRow !== null && selectedRow.data("tID") !== $(this).parent().data("tID")){//only reached when switching selected row
 				selectedRow.removeClass("selectedRow");
+				selectedRow.find("td.amount").html(selectedRow.amount);
+				selectedRow.find("td.date").html(selectedRow.date);
+				selectedRow.find("td.type").html(selectedRow.type);
+				selectedRow.find("td.memo").html(selectedRow.memo);
+				
 				console.log("logic to reset");
 				console.log(selectedRow);
 				console.log($(this).parent());
-			}//end: if
-			selectedRow=$(this).parent();
+				
 
+			}//end: if
+
+			//need a conditional here
+			if (selectedRow===null||selectedRow.data("tID") !== $(this).parent().data("tID")){
+				selectedRow=$(this).parent();
+				selectedRow.amount=selectedRow.find("td.amount").html();
+				selectedRow.date=selectedRow.find("td.date").html();
+				selectedRow.type=selectedRow.find("td.type").html();
+				selectedRow.memo=selectedRow.find("td.memo").html();
+			}
+				
 			$(this).parent().addClass("selectedRow");
 			var tracker = $(this).parent().html();
 			$(this).parent().find(".edit").html("save").off().click(
