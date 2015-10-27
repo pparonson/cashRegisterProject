@@ -195,7 +195,7 @@ require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
 					account.editTransaction(id, amt, date, type, memo);
 				}//end: fn
 			);
-			
+
 			$(this).parent().find(".delete:not(.first)").html("delete row").off().click(
 				function(evt){
 					alert("delete"+$(evt.target).parent().data("tID"));
