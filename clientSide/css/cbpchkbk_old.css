@@ -5,8 +5,6 @@ body {
   background-attachment: fixed;
   background-size: cover;
   margin:25px;
-  z-index:1;
-  position:relative;
   /*background-size: 1024px 768px;
   width: 1024px;
   height: 768px;*/
@@ -160,13 +158,13 @@ display:none;
 #accountMainPage input {
 	vertical-align:middle;
 }
-#mainTable tr:nth-child(2n) td{
+#mainTable tr:nth-child(2n) {
 	background-color:#e6eef0;
 }
 #mainTable tr:last-child td:not(.edit):not(.delete){
 	border-bottom: solid black 1px;
 }
-#mainTable tr:nth-child(2n-1) td, #mainTable tr th{
+#mainTable tr:nth-child(2n-1){
 	background-color:white;
 }
 #accountMainPage form input {
@@ -198,13 +196,11 @@ display:none;
 x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
 	background:blue;
 }
-#mainTable tr.selectedRow td{
+#mainTable tr.selectedRow{
 	background:yellow;
 }
 #mainTable td.edit, #mainTable td.delete{
-	position:relative;
 	visibility: hidden;
-	z-index:-4;
 	background:yellow;
 	min-width:50px;
 	color:black;
@@ -223,5 +219,4 @@ x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
 }
 #mainTable tr.selectedRow td.edit, #mainTable tr.selectedRow td.delete{
 	visibility: visible;
-	z-index:1
 }
