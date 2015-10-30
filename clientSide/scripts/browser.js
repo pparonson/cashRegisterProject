@@ -5,14 +5,16 @@ requirejs.config({
 		jquery: "../../node_modules/jquery/dist/jquery.min",
 		jqueryui: "./jquery-ui.min",
 		subscribers: "../../node_modules/subscribers/subscribers",
-		jqplot: "../jqPlot/jquery.jqplot.min"
+		jqplot: "../jqPlot/jquery.jqplot.min",
+		jqplothighlighter: "../jqPlot/plugins/jqplot.highlighter.min"
 	},
 	"shim": {
-		"jqplot": ["jquery"]
+		"jqplot": ["jquery"],
+		"jqplothighlighter": ["jqplot"]
 	}
 });
 
-require(["cashRegister", "jquery", "jqueryui", "jqplot"], function(cashRegister, $) {
+require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"], function(cashRegister, $) {
 //var cashRegister = require('cashRegister');
 	var account;
 	var selectedRow = null;
@@ -244,13 +246,43 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot"], function(cashRegister,
 
 
 		});//end: fn .focus()
-		setDataPointTable();
+		console.log(setDataPointArray)
+		$("#jqPlotAccount").empty();
+		var options={
+			title:account.accountName,
+			grid:{drawGridlines:false}, 
+			axes:{
+				yaxis:{
+					
+				},
+				xaxis:{
+					showTicks:false
+				}
+			},
+			highlighter: {
+				tooltipContentEditor: function(str, seriesIndex, pointIndex){
+					
+					if (pointIndex===0)
+						return "StartingBalance: $"+account.startingBalance;
+					else{
+						//return seriesIndex;
+						console.log(chart.series[0].data[pointIndex])
+						return account.transactions[pointIndex-1].toString()+"\n Balance: $"+chart.series[0].data[pointIndex][1];
+					}
+				},
+				show: true,
+				sizeAdjust:7.5,
+				tooltipLocation:"se"
+			}
+		}
+		if (account.transactions.length>0)
+		var chart = $.jqplot('jqPlotAccount', [setDataPointArray()], options);
 	}//end: fn presentAccount()
 
 	/*
 	DataPointTable
 	 */
-	var setDataPointArray = function() {
+	function setDataPointArray() {
 		var dataPointTableList = [];
 		dataPointTableList.push(account.startingBalance);
 		$.each(account.transactions, function() {

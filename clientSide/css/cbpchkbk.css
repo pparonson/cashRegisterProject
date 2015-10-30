@@ -234,5 +234,15 @@ x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
 .ui-menu li.ui-menu-item {
     font-size: 14px;
 }
+#jqPlotAccount{
+	width:780px;
+}
+div.jqplot-highlighter-tooltip{
+	opacity:.9;
+	background:rgba(208,208,208,0.95);
+	color:black;
+	border:solid black 1px;
+	padding:2px;
+}
 /*<ul class=" ui-front ui-menu ui-widget ui-widget-content" id="ui-id-1" tabindex="0" style="display: none; position: relative; top: -254.328px; left: 173px; width: 1163px;"><li class="ui-menu-item" id="ui-id-23" tabindex="-1">Cash</li><li class="ui-menu-item" id="ui-id-24" tabindex="-1">Credit Card</li><li class="ui-menu-item" id="ui-id-25" tabindex="-1">Check #</li><li class="ui-menu-item" id="ui-id-26" tabindex="-1">Direct Deposit</li></ul>*/
 /*<li class="ui-menu-item" id="ui-id-2" tabindex="-1">Cash</li>*/
