@@ -4,11 +4,15 @@ requirejs.config({
 		cashRegister: "../../node_modules/cashRegister/cashRegister",
 		jquery: "../../node_modules/jquery/dist/jquery.min",
 		jqueryui: "./jquery-ui.min",
-		subscribers: "../../node_modules/subscribers/subscribers"
+		subscribers: "../../node_modules/subscribers/subscribers",
+		jqplot: "../jqPlot/jquery.jqplot.min"
+	},
+	"shim": {
+		"jqplot": ["jquery"]
 	}
 });
 
-require(["cashRegister", "jquery", "jqueryui"], function(cashRegister, $) {
+require(["cashRegister", "jquery", "jqueryui", "jqplot"], function(cashRegister, $) {
 //var cashRegister = require('cashRegister');
 	var account;
 	var selectedRow = null;
