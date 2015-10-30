@@ -27,8 +27,6 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot"], function(cashRegister,
 			, "Wire Transfer", "Direct Deposit"]
 		});//end: fn
 
-
-
 		/*
 		getElementById translated to jQuery
 		document.getElementById("transactionDate").value = getCurrentDate();
@@ -246,7 +244,23 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot"], function(cashRegister,
 
 
 		});//end: fn .focus()
+		setDataPointTable();
 	}//end: fn presentAccount()
+
+	/*
+	DataPointTable
+	 */
+	var setDataPointArray = function() {
+		var dataPointTableList = [];
+		dataPointTableList.push(account.startingBalance);
+		$.each(account.transactions, function() {
+			var currentBalance = dataPointTableList[dataPointTableList.length - 1] + this.amount;
+			dataPointTableList.push(currentBalance);
+
+		});//end: fn)
+		return dataPointTableList;
+		console.log(dataPointTableList);
+	};//end: fn
 
 	$(window).unload(function(){
 		localStorage.setItem("Account", JSON.stringify(account));
