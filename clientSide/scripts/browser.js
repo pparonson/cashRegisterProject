@@ -6,15 +6,19 @@ requirejs.config({
 		jqueryui: "./jquery-ui.min",
 		subscribers: "../../node_modules/subscribers/subscribers",
 		jqplot: "../jqPlot/jquery.jqplot.min",
-		jqplothighlighter: "../jqPlot/plugins/jqplot.highlighter.min"
+		jqplothighlighter: "../jqPlot/plugins/jqplot.highlighter.min",
+		jqplotpierenderer: "../jqPlot/plugins/jqplot.pieRenderer.min"
+
 	},
 	"shim": {
 		"jqplot": ["jquery"],
-		"jqplothighlighter": ["jqplot"]
+		"jqplothighlighter": ["jqplot"],
+		"jqplotpierenderer": ["jqplot"]
 	}
 });
 
-require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"], function(cashRegister, $) {
+require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
+		, "jqplotpierenderer"], function(cashRegister, $) {
 //var cashRegister = require('cashRegister');
 	var account;
 	var selectedRow = null;
@@ -104,7 +108,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"], f
 
 		$("#editAccount").click(function() {
 			$("#mainTable td:not(.edit):not(.delete):not(.balanceCol):not(.first),"
-			+" #mainTable td.balanceCol.first").attr("contenteditable","true");
+			+ " #mainTable td.balanceCol.first").attr("contenteditable","true");
 			//$("#mainTable td.balanceCol.first").attr("contenteditable","true");
 			//$("#mainTable tr:has(td)").addClass("editableRow");
 		});
@@ -131,8 +135,8 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"], f
 	}//end: fn
 	function presentAccount() {
 		$("#datepicker").val(getCurrentDate);
-		console.log($("#accountType, #memo, #transactionAmount"));
-		$("#accountType, #memo, #transactionAmount").val("");
+		// console.log($("#accountType, #memo, #transactionAmount"));
+		$("#accountType, #transactionAmount").val("");
 		selectedRow=null;
 		$("#accountMainPage").css("display","block");
 		var table = $("#mainTable");
@@ -150,7 +154,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"], f
 					+ "<td class='edit first'></td>"
 					+ "<td class='delete first'></td></tr>"));
 		var row, i;
-		for (i = 0; i < account.transactions.length; i += 1){
+		for (i = 0; i < account.transactions.length; i += 1) {
 			row = makeRow(account.transactions[i]);
 			table.append(row);
 		}//end: for
@@ -181,8 +185,8 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"], f
 		$("#currentBalance").html("Balance: " + account.currentBalance);
 
 		$("#mainTable td:not(.edit):not(.delete)").focus(function(evt){
-
-			if (selectedRow !== null && selectedRow.data("tID") !== $(this).parent().data("tID")){//only reached when switching selected row
+			//only reached when switching selected row
+			if (selectedRow !== null && selectedRow.data("tID") !== $(this).parent().data("tID")){
 				selectedRow.removeClass("selectedRow");
 				selectedRow.find("td.amount").html(selectedRow.amount);
 				selectedRow.find("td.date").html(selectedRow.date);
@@ -242,18 +246,15 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"], f
 				}//end: fn
 			);
 
-
-
-
 		});//end: fn .focus()
-		console.log(setDataPointArray)
+		console.log(setDataPointArray);
 		$("#jqPlotAccount").empty();
-		var options={
+		var options = {
 			title:account.accountName,
-			grid:{drawGridlines:false}, 
+			grid:{drawGridlines:false},
 			axes:{
 				yaxis:{
-					
+
 				},
 				xaxis:{
 					showTicks:false
@@ -261,22 +262,57 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"], f
 			},
 			highlighter: {
 				tooltipContentEditor: function(str, seriesIndex, pointIndex){
-					
+
 					if (pointIndex===0)
 						return "StartingBalance: $"+account.startingBalance;
 					else{
 						//return seriesIndex;
-						console.log(chart.series[0].data[pointIndex])
-						return account.transactions[pointIndex-1].toString()+"\n Balance: $"+chart.series[0].data[pointIndex][1];
+						console.log(chart.series[0].data[pointIndex]);
+						return account.transactions[pointIndex-1].toString()
+							+ "\n Balance: $"+chart.series[0].data[pointIndex][1];
 					}
 				},
-				show: true,
-				sizeAdjust:7.5,
-				tooltipLocation:"se"
+				show: true
+				, sizeAdjust: 7.5
+				, tooltipLocation: "se"
 			}
-		}
-		if (account.transactions.length>0)
-		var chart = $.jqplot('jqPlotAccount', [setDataPointArray()], options);
+		};//end: obj options
+		// if transactions present, call chart .jqplot fn
+		if (account.transactions.length>0) {
+			var chart = $.jqplot('jqPlotAccount'
+			, [setDataPointArray()], options);
+		}//end: if
+
+		// if a memo withdrawl expense is present
+		// iterate through transaction obj and grab memo
+		options = {
+      		title: ' ',
+		    seriesDefaults: {
+		        shadow: false,
+				highlighter: {
+					// tooltipContentEditor: function(str, seriesIndex, pointIndex){
+					// 	return "['Transportation', 0]";
+					// }
+					show: true
+					, tooltipLocation: "se"
+					, useAxesFormatters: false
+					, formatString: "%s"
+
+				}//end: obj highlighter
+		        , renderer: jQuery.jqplot.PieRenderer
+		        , rendererOptions: {
+		        	startAngle: 180,
+		        	sliceMargin: 4,
+		        	showDataLabels: true
+				}//end: renderOptions obj literal
+		    }//end: seriesDefaults
+		    , legend: { show:true, location: 'w' }
+		}//end: options obj
+		$("#jqPlotMemo").empty();
+		if (account.transactions.length > 0) {
+			var data = setPieChartData();
+			$.jqplot('jqPlotMemo', [data], options);
+		}//end: if
 	}//end: fn presentAccount()
 
 	/*
@@ -286,13 +322,79 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"], f
 		var dataPointTableList = [];
 		dataPointTableList.push(account.startingBalance);
 		$.each(account.transactions, function() {
-			var currentBalance = dataPointTableList[dataPointTableList.length - 1] + this.amount;
+			var currentBalance = dataPointTableList[dataPointTableList.length - 1]
+				+ this.amount;
 			dataPointTableList.push(currentBalance);
 
-		});//end: fn)
-		return dataPointTableList;
+		});//end: $.each()
 		console.log(dataPointTableList);
-	};//end: fn
+		return dataPointTableList;
+	}//end: fn setDataPointArray
+
+	// iterate through account.transactions to get to account.transaction.memo
+	// create a obj container to add account.transaction.memo to appropriate expense
+	// category array
+	function setPieChartData() {
+		var pieChartData = [];
+		pieChartData[0] = ["Transportation", 0];
+		pieChartData[1] = ["Entertainment", 0];
+		pieChartData[2] = ["Food", 0];
+		pieChartData[3] = ["Housing", 0];
+		pieChartData[4] = ["Utilities", 0];
+		pieChartData[5] = ["Personal", 0];
+		pieChartData[6] = ["Health", 0];
+		pieChartData[7] = ["Child-care", 0];
+		pieChartData[8] = ["Education", 0];
+		pieChartData[9] = ["Pets", 0];
+		pieChartData[10] = ["Miscellaneous", 0];
+
+		$.each(account.transactions, function(key, value) {
+			switch(value.memo) {
+    			case "Transportation":
+        			pieChartData[0][1] -= value.amount;
+        			break;
+    			case "Entertainment":
+					pieChartData[1][1] -= value.amount;
+					break;
+				case "Food":
+					pieChartData[2][1] -= value.amount;
+					break;
+				case "Housing":
+					pieChartData[3][1] -= value.amount;
+					break;
+				case "Utilities":
+					pieChartData[4][1] -= value.amount;
+					break;
+				case "Personal":
+					pieChartData[5][1] -= value.amount;
+					break;
+				case "Health":
+					pieChartData[6][1] -= value.amount;
+					break;
+				case "Child-care":
+					pieChartData[7][1] -= value.amount;
+					break;
+				case "Education":
+					pieChartData[8][1] -= value.amount;
+					break;
+				case "Pets":
+					pieChartData[9][1] -= value.amount;
+					break;
+				case "Miscellaneous":
+					pieChartData[10][1] -= value.amount;
+					break;
+				default:
+					console.log("Error adding memo expense to pieChartData object.");
+				}//end: switch
+		});//end: $.each()
+		var tempPieChartData = [];
+		for (var i = 0; i < pieChartData.length; i += 1) {
+			if (pieChartData[i][1] > 0) {
+				tempPieChartData.push(pieChartData[i]);
+			}
+		}//end:for
+		return tempPieChartData;
+	}//end fn pieChartDataList
 
 	$(window).unload(function(){
 		localStorage.setItem("Account", JSON.stringify(account));
