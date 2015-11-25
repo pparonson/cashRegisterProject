@@ -2,62 +2,94 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <!-- <link rel="stylesheet" type="text/css" href="clientSide/css/reset.css">  -->
-        <link rel="stylesheet" type="text/css" href="clientSide/css/cbpchkbk.css">
-        <link rel="stylesheet" type="text/css"
-            href="clientSide/jQueryUI/jquery-ui.theme.min.css">
-        <link rel="stylesheet" type="text/css"
-            href="clientSide/jQueryUI/jquery-ui.structure.min.css">
-        <link rel="stylesheet" type="text/css"
-            href="clientSide/jqPlot/jquery.jqplot.min.css">
+        <link rel="stylesheet"
+              type="text/css"
+              href="clientSide/css/reset.css">
+        <link rel="stylesheet"
+              type="text/css"
+              href="clientSide/css/cbpchkbk_old.css">
+        <link rel="stylesheet"
+    		  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet"
+    		  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+        <link rel="stylesheet"
+              type="text/css"
+              href="clientSide/jQueryUI/jquery-ui.theme.min.css">
+        <link rel="stylesheet"
+              type="text/css"
+              href="clientSide/jQueryUI/jquery-ui.structure.min.css">
+        <link rel="stylesheet"
+              type="text/css"
+              href="clientSide/jqPlot/jquery.jqplot.min.css">
         <script data-main="clientSide/scripts/browser.js"
             src="clientSide/scripts/require.js">
         </script>
         <title>Banking Account Manager - cbp</title>
     </head>
     <body>
-        <div id="introMessage">
-            <h1>Know Your Journey</h1>
-        </div>
         <main>
             <div id="welcomePage">
-                <h3 id="systemName">Account Manager System</h3>
                 <form action="" class="style-5" method="post">
-                    <input type="number" name="SBalance" id="SBalance"
-                        placeholder="Starting Balance">
-                    <input type="text" name="acctType" id="acctName"
-                        placeholder="Account Type">
-                    <!-- </input> -->
-                    <input type="button" value="Submit"
-                    class="myButton" id="submitWelcome">
-                    <!-- </input> -->
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input class="form-control" type="number" name="SBalance" id="SBalance"
+                                placeholder="Starting Balance">
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control" type="text" name="acctType" id="acctName"
+                                placeholder="Account Type">
+                        </div>
+                        <div class="col-md-2">
+                            <button class="myButton btn btn-primary btn-block" id="submitWelcome">
+                                <i class="fa fa-pie-chart"></i>Submit
+                            </button>
+                        </div>
+                    </div>
                 </form>
             </div>
             <div class="style-5" id="accountMainPage">
                 <form action=""  method="post">
-                    <input name="date" id="datepicker"
-                        placeholder="yyyy-mm-dd">
-                    <input type="text" name="type" id="accountType"
-                        placeholder="Transaction Type">
-                    <!-- <input type="text" name="memo" id="memo" placeholder="Memo"> -->
-                    <select name="memo" id="memo" placeholder="Memo">
-                        <option>Deposit</option>
-                        <option>Transportation</option>
-                        <option>Entertainment</option>
-                        <option>Food</option>
-                        <option>Housing</option>
-                        <option>Utilities</option>
-                        <option>Personal</option>
-                        <option>Health / Medical</option>
-                        <option>Child-care</option>
-                        <option>Education</option>
-                        <option>Pets</option>
-                        <option>Miscellaneous</option>
-                    </select>
-                    <input type="number" name="amount" id="transactionAmount"
-                        placeholder="Transaction Amount ">
-                    <input type="button" value="&#x2013;" id="submitWithdraw">
-                    <input type="button" value="+" id="submitDeposit">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input class="form-control" name="date" id="datepicker"
+                                placeholder="yyyy-mm-dd" required>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control" type="text" name="type" id="accountType"
+                                placeholder="Transaction Type">
+                        </div>
+                        <div class="col-md-2">
+                            <select class="form-control" name="memo" id="memo" placeholder="Memo" required>
+                                <option value="deposit" selected>Deposit</option>
+                                <option>Transportation</option>
+                                <option>Entertainment</option>
+                                <option>Food</option>
+                                <option>Housing</option>
+                                <option>Utilities</option>
+                                <option>Personal</option>
+                                <option>Health / Medical</option>
+                                <option>Child-care</option>
+                                <option>Education</option>
+                                <option>Pets</option>
+                                <option>Miscellaneous</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <input class="form-control" type="number" name="amount" id="transactionAmount"
+                                placeholder="Transaction Amount" required>
+                        </div>
+                        <div class="col-md-1" id="submitWithdrawlDiv">
+                            <!-- <input class="form-control" type="button" value="&#x2013;" id="submitWithdraw"> -->
+                            <button class="myButton btn btn-primary btn-block" id="submitWithdraw">
+                                <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <div class="col-md-1" id="submitDepositDiv">
+                            <!-- <input class="form-control" type="button" value="+" id="submitDeposit"> -->
+                            <button class="myButton btn btn-primary btn-block" id="submitDeposit">
+                                <i class="fa fa-plus"></i>
+                        </div>
+                    </div>
                 </form>
                 <h1 id="currentBalance">Balance</h1>
                 <table id="mainTable">
@@ -75,8 +107,18 @@
                         <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td>
                     </tr>
                 </table>
-                <input type="button" value="Edit Account" class="myButton" id="editAccount">
-                <input type="button" value="Delete Account" class="myButton" id="deleteAccount">
+                <div class="row">
+                    <div class="col-md-2">
+                        <button class="myButton btn btn-block" id="editAccount">
+                            <i class="fa fa-edit"></i>Edit
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <button class="myButton btn btn-block btn-danger" id="deleteAccount">
+                            <i class="fa fa-trash"></i> Delete
+                        </button>
+                    </div>
+                </div>
                 <div id="jqPlotAccount"></div>
                 <div id="jqPlotMemo"></div>
             </div>

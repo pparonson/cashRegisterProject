@@ -1,27 +1,12 @@
 body {
-  background-image: url("../Images/mtngrl1024.jpg");
-  background-repeat: no-repeat;
+  /*background-image: url("../Images/mtngrl1024.jpg");*/
+  /*background-repeat: no-repeat;*/
   background-color: #b0c4de;
-  background-attachment: fixed;
-  background-size: cover;
-  margin:25px;
-  /*background-size: 1024px 768px;
-  width: 1024px;
-  height: 768px;*/
-
-}
-
-#introMessage {
-	/*background-image:url(chicago.jpg);*/
-	/*xwidth:100px;*/
-	/*xheight:100px;*/
-	text-align: left;
-	/*float:left;*/
-}
-
-#introMessage:hover #tagName {
-	opacity:0.9;
-	filter:alpha(opacity=90);
+  /*background-attachment: fixed;*/
+  /*background-size: cover;*/
+  /*margin:25px;*/
+  /*z-index:1;*/
+  position:relative;
 }
 
 .myButton {
@@ -100,6 +85,13 @@ tr.withdrawRow {
 tr.depositRow {
   color: #16A808;
 }
+div.jqplot-highlighter-tooltip{
+	opacity:.9;
+	background:rgba(208,208,208,0.95);
+	color:black;
+	border:solid black 1px;
+	padding:2px;
+}
 #mainTable {
     xbackground-color: white;
 	width:800px;
@@ -125,8 +117,9 @@ tr.depositRow {
 #mainTable th.type {
 	width:18%
 }
-#mainTable td.date, #mainTable td.type, #mainTable td.amount, #mainTable td.memo {
-	border-right:solid black 1px;
+#mainTable td.date, #mainTable td.type
+    , #mainTable td.amount, #mainTable td.memo {
+	       border-right:solid black 1px;
 }
 #mainTable td.date{
 	border-left:solid black 1px;
@@ -154,17 +147,16 @@ display:none;
     box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
 
-
 #accountMainPage input {
 	vertical-align:middle;
 }
-#mainTable tr:nth-child(2n) {
+#mainTable tr:nth-child(2n) td{
 	background-color:#e6eef0;
 }
 #mainTable tr:last-child td:not(.edit):not(.delete){
 	border-bottom: solid black 1px;
 }
-#mainTable tr:nth-child(2n-1){
+#mainTable tr:nth-child(2n-1) td, #mainTable tr th{
 	background-color:white;
 }
 #accountMainPage form input {
@@ -196,18 +188,20 @@ display:none;
 x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
 	background:blue;
 }
-#mainTable tr.selectedRow{
+#mainTable tr.selectedRow td{
 	background:yellow;
 }
 #mainTable td.edit, #mainTable td.delete{
+	position:relative;
 	visibility: hidden;
+	z-index:-4;
 	background:yellow;
 	min-width:50px;
 	color:black;
 	text-align: center;
 }
 #mainTable td.delete{
-	min-width:100px;
+	min-width:102px;
 }
 #mainTable td.edit:hover{
 	background:green;
@@ -217,6 +211,42 @@ x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
 	background:red;
 	cursor: pointer;
 }
+
+.ui-autocomplete.ui-menu.ui-widget {
+    width: 147px;
+    list-style-type: none;
+    padding-left: 5px;
+
+}
+.ui-menu li.ui-menu-item {
+    font-size: 14px;
+}
 #mainTable tr.selectedRow td.edit, #mainTable tr.selectedRow td.delete{
 	visibility: visible;
+	z-index:1
+}
+#jqPlotAccount {
+	width:780px;
+}
+#jqPlotMemo {
+    width: 755px;
+    margin-left: 25px;
+}
+#memo {
+    height: 39px;
+    width: 169px;
+    font: 14px BlinkMacSystemFont;
+}
+
+#introMessage {
+	/*background-image:url(chicago.jpg);*/
+	/*xwidth:100px;*/
+	/*xheight:100px;*/
+	text-align: left;
+	/*float:left;*/
+}
+
+#introMessage:hover #tagName {
+	opacity:0.9;
+	filter:alpha(opacity=90);
 }

@@ -43,8 +43,8 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 		if (localStorageJson && localStorageJson !== "undefined" &&
 		localStorageJson !== "null"){
 				$("#welcomePage").css("display","none");	//temporary
-				console.log(typeof localStorageJson);
-				console.log(localStorageJson);
+				// console.log(typeof localStorageJson);
+				// console.log(localStorageJson);
 				var obj = JSON.parse(localStorageJson);
 				account = cashRegister.Account.loadJSON(obj);
 				presentAccount();
@@ -63,7 +63,9 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 		initialize account by calling cashRegister.Account.initializeAccount
 			(balance, acctname) and call presentAccount
 		 */
+
 		$("#submitWelcome").click(function() {
+			console.log("inside welcome button");
 			account = cashRegister.Account.initializeAccount(
 				($("#SBalance").val() * 1), $("#acctName").val());
 			$("#welcomePage").css("display","none");
@@ -73,6 +75,19 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 			});//end: fn
 		});
 
+		//default hide withdrawl element
+		$("#submitWithdrawlDiv").hide();
+
+		// show / hide withdrawl and deposit buttons
+		$(document).on('change','#memo',function(){
+            if ($(this).find("option:selected").attr('value') !== 'deposit') {
+				$("#submitDepositDiv").hide();
+				$("#submitWithdrawlDiv").show();
+			} else {
+				$("#submitDepositDiv").show();
+				$("#submitWithdrawlDiv").hide();
+			}
+          });
 		$("#submitDeposit").click(function() {
 				try{
 					account.addTransaction(
@@ -167,8 +182,8 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 				tr.addClass("depositRow");
 			}//end: if
 			tr.data("tID", transactionObj.id);
-			console.log(tr.data("tID"));
-			console.log(transactionObj.id);
+			// console.log(tr.data("tID"));
+			// console.log(transactionObj.id);
 			tr.append($("<td class='date'>" + transactionObj.date + "</td>"));
 			tr.append($("<td class='type'>" + transactionObj.type + "</td>"));
 			tr.append($("<td class='memo'>" + transactionObj.memo + "</td>"));
@@ -193,9 +208,9 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 				selectedRow.find("td.type").html(selectedRow.type);
 				selectedRow.find("td.memo").html(selectedRow.memo);
 				selectedRow.find("td.balanceCol").html(selectedRow.balance);
-				console.log("logic to reset");
-				console.log(selectedRow);
-				console.log($(this).parent());
+				// console.log("logic to reset");
+				// console.log(selectedRow);
+				// console.log($(this).parent());
 
 
 			}//end: if
@@ -222,7 +237,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 					var type=row.find("td.type").html();
 					var memo=row.find("td.memo").html();
 					var id = row.data("tID");
-					console.log(amt +date+type+memo+id);
+					// console.log(amt +date+type+memo+id);
 					account.editTransaction(id, amt, date, type, memo);
 				}//end: fn
 			);
@@ -247,7 +262,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 			);
 
 		});//end: fn .focus()
-		console.log(setDataPointArray);
+		// console.log(setDataPointArray);
 		$("#jqPlotAccount").empty();
 		var options = {
 			title:account.accountName,
@@ -267,7 +282,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 						return "StartingBalance: $"+account.startingBalance;
 					else{
 						//return seriesIndex;
-						console.log(chart.series[0].data[pointIndex]);
+						// console.log(chart.series[0].data[pointIndex]);
 						return account.transactions[pointIndex-1].toString()
 							+ "\n Balance: $"+chart.series[0].data[pointIndex][1];
 					}
@@ -307,7 +322,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 				}//end: renderOptions obj literal
 		    }//end: seriesDefaults
 		    , legend: { show:true, location: 'w' }
-		}//end: options obj
+		};//end: options obj
 		$("#jqPlotMemo").empty();
 		if (account.transactions.length > 0) {
 			var data = setPieChartData();
@@ -327,7 +342,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 			dataPointTableList.push(currentBalance);
 
 		});//end: $.each()
-		console.log(dataPointTableList);
+		// console.log(dataPointTableList);
 		return dataPointTableList;
 	}//end: fn setDataPointArray
 
@@ -384,7 +399,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 					pieChartData[10][1] -= value.amount;
 					break;
 				default:
-					console.log("Error adding memo expense to pieChartData object.");
+					// console.log("Error adding memo expense to pieChartData object.");
 				}//end: switch
 		});//end: $.each()
 		var tempPieChartData = [];
