@@ -76,16 +76,15 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 		});
 
 		//default hide withdrawl element
-		$("#submitWithdrawlDiv").hide();
-
+		$("#submitWithdraw").prop("disabled", true);
 		// show / hide withdrawl and deposit buttons
 		$(document).on('change','#memo',function(){
             if ($(this).find("option:selected").attr('value') !== 'deposit') {
-				$("#submitDepositDiv").hide();
-				$("#submitWithdrawlDiv").show();
+				$("#submitDeposit").prop("disabled", true);
+				$("#submitWithdraw").prop("disabled", false);
 			} else {
-				$("#submitDepositDiv").show();
-				$("#submitWithdrawlDiv").hide();
+				$("#submitDeposit").prop("disabled", false);
+				$("#submitWithdraw").prop("disabled", true);
 			}
           });
 		$("#submitDeposit").click(function() {
