@@ -1,229 +1,98 @@
+/*Color Palate "Vintage Patriotic":
+#6491A1
+#385A72
+#003455
+#A10518
+#212121
+#404040
+#D8D8D8
+#18a105
+*/
 body {
-  background-image: url("../Images/mtngrl1024.jpg");
+  position: relative;
+  top: 60px;
+  left: 60px;
+  background-image: url(../Images/american_flag.png);
   background-repeat: no-repeat;
-  background-color: #b0c4de;
-  background-attachment: fixed;
   background-size: cover;
-  margin:25px;
-  z-index:1;
-  position:relative;
-  /*background-size: 1024px 768px;
-  width: 1024px;
-  height: 768px;*/
-
-}
-
-#introMessage {
-	/*background-image:url(chicago.jpg);*/
-	/*xwidth:100px;*/
-	/*xheight:100px;*/
-	text-align: left;
-	/*float:left;*/
-}
-
-#introMessage:hover #tagName {
-	opacity:0.9;
-	filter:alpha(opacity=90);
 }
 
 .myButton {
 	-moz-box-shadow: 3px 4px 0 0 #899599;
-	-webkit-box-shadow: 3px 4px 0 0 #899599;
-	box-shadow: 3px 4px 0 0 #899599;
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #bab1ba));
-	background:-moz-linear-gradient(top, #ededed 5%, #bab1ba 100%);
-	background:-webkit-linear-gradient(top, #ededed 5%, #bab1ba 100%);
-	background:-o-linear-gradient(top, #ededed 5%, #bab1ba 100%);
-	background:-ms-linear-gradient(top, #ededed 5%, #bab1ba 100%);
-	background:linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#bab1ba',GradientType=0);
-	background-color:#ededed;
-	-moz-border-radius:15px;
-	-webkit-border-radius:15px;
+	-webkit-box-shadow: 1px 1px 2px 0 #707070;
+	box-shadow: 1px 1px 2px 0 #707070;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #ededed), color-stop(1, #bab1ba));
+	background: -moz-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+	background: -webkit-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+	background: -o-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+	background: -ms-linear-gradient(top, #ededed 5%, #bab1ba 100%);
+	background: linear-gradient(to bottom, #ededed 5%, #bab1ba 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#bab1ba',GradientType=0);
+	background-color: #ededed;
+	-moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
 	border-radius:15px;
-	border:1px solid #d6bcd6;
+	border: 1px solid #d6bcd6;
 	display:inline-block;
 	cursor:pointer;
-	color: #0F4B5E;
-	font-family:Arial;
-	font-size:11px;
-	padding:7px 25px;
-	text-decoration:none;
-	text-shadow:0 1px 0px #e1e2ed;
+    color: #fff;
+	font-family: Arial;
+	font-size: 11px;
+	padding: 7px 25px;
+	text-decoration: none;
+	xtext-shadow: 0 1px 0px #e1e2ed;
 }
 .myButton:hover {
-	background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bab1ba), color-stop(1, #ededed));
-	background:-moz-linear-gradient(top, #bab1ba 5%, #ededed 100%);
-	background:-webkit-linear-gradient(top, #bab1ba 5%, #ededed 100%);
-	background:-o-linear-gradient(top, #bab1ba 5%, #ededed 100%);
-	background:-ms-linear-gradient(top, #bab1ba 5%, #ededed 100%);
-	background:linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#bab1ba', endColorstr='#ededed',GradientType=0);
-	background-color:#bab1ba;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bab1ba), color-stop(1, #ededed));
+	background: -moz-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+	background: -webkit-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+	background: -o-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+	background: -ms-linear-gradient(top, #bab1ba 5%, #ededed 100%);
+	background: linear-gradient(to bottom, #bab1ba 5%, #ededed 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#bab1ba', endColorstr='#ededed',GradientType=0);
+	background-color: #bab1ba;
 }
 .myButton:active {
-	position:relative;
-	top:1px;
+	position: relative;
+	top: 1px;
 }
 .style-5 input[type="number"] {
-  padding: 10px;
-  border: solid 1px black;
   box-shadow: inset 1px 1px 2px 0 #707070;
   transition: box-shadow 0.3s;
 }
-
 .style-5 input[type="number"].focus {
   box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
 .style-5 input[type="text"] {
-  padding: 10px;
-  border: solid 1px black;
+  /*border: solid 1px black;*/
   box-shadow: inset 1px 1px 2px 0 #707070;
   transition: box-shadow 0.3s;
 }
-
 .style-5 input[type="text"].focus {
   box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
-
 .style-5 input[list="transactionTypes"] {
-  padding: 10px;
+  xpadding: 10px;
   border: solid 1px black;
   box-shadow: inset 1px 1px 2px 0 #707070;
   transition: box-shadow 0.3s;
 }
-
 .style-5 input[list="transactionTypes"].focus {
   box-shadow: inset 1px 1px 2px 0 #c9c9c9;
 }
 tr.withdrawRow {
-  color: red;
+  color: #A10518;
 }
 tr.depositRow {
-  color: #16A808;
+  color: #18A105;
 }
-#mainTable {
-    xbackground-color: white;
-	width:800px;
-	border-spacing: 0px;
-	xborder:solid black 1px;
-}
-#mainTable th.balance, th.amount {
-	width:12%;
-}
-#mainTable th.date {
-	width:20%;
-}
-#mainTable th.memo{
-	width:30%;
-}
-#mainTable th {
-	border-bottom:solid black 1px;
-	border-top:solid black 1px;
-}
-#mainTable th.date{
-	border-left:solid black 1px;
-}
-#mainTable th.type {
-	width:18%
-}
-#mainTable td.date, #mainTable td.type
-    , #mainTable td.amount, #mainTable td.memo {
-	       border-right:solid black 1px;
-}
-#mainTable td.date{
-	border-left:solid black 1px;
-}
-#mainTable td.balanceCol, th.balance{
-	border-right:solid black 1px;
-}
-#mainTable td.amount, #mainTable td.balanceCol {
-	text-align: right;
-}
-#welcomePage, #accountMainPage {
-display:none;
-}
+div.jqplot-highlighter-tooltip {
+	opacity: .9;
+	background: rgba(208, 208, 208, 0.95);
+	color: black;
+	border: solid black 1px;
+	padding: 2px;
 
-#datepicker {
-	height:17px;
-	vertical-align: middle;
-    padding: 10px;
-    border: solid 1px black;
-    box-shadow: inset 1px 1px 2px 0 #707070;
-    transition: box-shadow 0.3s;
-}
-
-#datepicker.focus {
-    box-shadow: inset 1px 1px 2px 0 #c9c9c9;
-}
-
-#accountMainPage input {
-	vertical-align:middle;
-}
-#mainTable tr:nth-child(2n) td{
-	background-color:#e6eef0;
-}
-#mainTable tr:last-child td:not(.edit):not(.delete){
-	border-bottom: solid black 1px;
-}
-#mainTable tr:nth-child(2n-1) td, #mainTable tr th{
-	background-color:white;
-}
-#accountMainPage form input {
-	font-size: 14px;
-}
-#deleteAccount, #editAccount {
-	width:125px;
-	margin-top:12px;
-}
-#submitDeposit{
-	background:#16A808;
-	border:solid seagreen 1px;
-}
-#submitDeposit:hover{
-	background:green;
-}
-#submitWithdraw{
-	background:red;
-	border:solid #cf0000 1px;
-}
-#submitWithdraw:hover{
-	background:#cf0000;
-}
-#submitDeposit, #submitWithdraw{
-	height:40px;
-	width:40px;
-	border-radius:20px;
-}
-x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
-	background:blue;
-}
-#mainTable tr.selectedRow td{
-	background:yellow;
-}
-#mainTable td.edit, #mainTable td.delete{
-	position:relative;
-	visibility: hidden;
-	z-index:-4;
-	background:yellow;
-	min-width:50px;
-	color:black;
-	text-align: center;
-}
-#mainTable td.delete{
-	min-width:102px;
-}
-#mainTable td.edit:hover{
-	background:green;
-	cursor:pointer;
-}
-#mainTable td.delete:hover{
-	background:red;
-	cursor: pointer;
-}
-#mainTable tr.selectedRow td.edit, #mainTable tr.selectedRow td.delete{
-	visibility: visible;
-	z-index:1
 }
 .ui-autocomplete.ui-menu.ui-widget {
     width: 147px;
@@ -234,31 +103,154 @@ x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
 .ui-menu li.ui-menu-item {
     font-size: 14px;
 }
+#mainTable {
+	width: 800px;
+	border-spacing: 0px;
+    border-radius: 4px;
+}
+#mainTable th.balance, th.amount {
+	width: 12%;
+}
+#mainTable th.date {
+	width: 20%;
+}
+#mainTable th.memo {
+	width: 30%;
+}
+#mainTable th {
+	xborder-bottom: solid black 1px;
+	xborder-top: solid black 1px;
+    text-align: center;
+    color: #385A72;
+}
+#mainTable td {
+    text-align: center;
+}
+#mainTable th.date {
+	xborder-left: solid black 1px;
+}
+#mainTable th.type {
+	width: 18%
+}
+#mainTable td.date, #mainTable td.type
+    , #mainTable td.amount, #mainTable td.memo {
+	       border-right: solid 1px #D8D8D8;
+}
+#mainTable td.date {
+	xborder-left: solid black 1px;
+}
+#mainTable td.balanceCol, th.balance {
+	xborder-right: solid black 1px;
+}
+#mainTable td.amount, #mainTable td.balanceCol {
+	/*text-align: right;*/
+}
+#mainTable tr:nth-child(2n) td {
+	background-color:#e6eef0;
+    xbackground-color: #D8D8D8
+}
+#mainTable tr:last-child td:not(.edit):not(.delete) {
+	xborder-bottom: solid black 1px;
+}
+#mainTable tr:nth-child(2n-1) td, #mainTable tr th {
+	background-color: white;
+}
+/*x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus {
+	background:blue;
+}*/
+#mainTable tr.selectedRow td {
+    background-color: #FFCB05;
+}
+#mainTable td.edit, #mainTable td.delete {
+	position: relative;
+	visibility: hidden;
+	z-index: -4;
+    background-color: #FFCB05;
+	min-width: 50px;
+	color: black;
+	text-align: center;
+}
+#mainTable td.delete {
+	min-width: 102px;
+}
+#mainTable td.edit:hover {
+	background: #18a105;
+	cursor:pointer;
+}
+#mainTable td.delete:hover {
+	background: #A10518;
+	cursor: pointer;
+}
+#mainTable tr.selectedRow td.edit, #mainTable tr.selectedRow td.delete {
+	visibility: visible;
+	z-index: 1;
+}
+#welcomePage, #accountMainPage {
+display:none;
+}
+#datepicker {
+	xvertical-align: middle;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
+}
+#datepicker.focus {
+    box-shadow: inset 1px 1px 2px 0 #c9c9c9;
+}
+#accountMainPage input {
+	vertical-align:middle;
+}
+#accountMainPage form input {
+	font-size: 14px;
+}
+#deleteAccount {
+	width:125px;
+	margin-top:12px;
+    background-color: #A10518;
+}
+#editAccount {
+    width:125px;
+    margin-top:12px;
+    background: #385A72;
+}
+
+#submitWelcome {
+    background-color: #385A72;
+}
+#submitDeposit {
+	background: #18A105;
+	border:solid green 1px;
+}
+#submitDeposit: hover {
+	background: green;
+}
+#submitWithdraw {
+	background: #A10518;
+	border: solid #cf0000 1px;
+}
+#submitWithdraw:hover {
+	background:#cf0000;
+}
+#submitDeposit, #submitWithdraw {
+	height:40px;
+	width:40px;
+	border-radius:20px;
+}
 #jqPlotAccount {
 	width:780px;
-}
-div.jqplot-highlighter-tooltip{
-	opacity:.9;
-	background:rgba(208,208,208,0.95);
-	color:black;
-	border:solid black 1px;
-	padding:2px;
 }
 #jqPlotMemo {
     width: 755px;
     margin-left: 25px;
 }
 #memo {
-    height: 39px;
-    width: 169px;
-    font: 14px BlinkMacSystemFont;
+    box-shadow: inset 1px 1px 2px 0 #707070;
+    transition: box-shadow 0.3s;
 }
-/*
-<ul class=" ui-front ui-menu ui-widget ui-widget-content"
-    id="ui-id-1" tabindex="0" style="display: none; position:
-    relative; top: -254.328px; left: 173px; width: 1163px;">
-    <li class="ui-menu-item" id="ui-id-23" tabindex="-1">Cash</li>
-    <li class="ui-menu-item" id="ui-id-24" tabindex="-1">Credit Card</li>
-    <li class="ui-menu-item" id="ui-id-25" tabindex="-1">Check #</li>
-    <li class="ui-menu-item" id="ui-id-26" tabindex="-1">Direct Deposit</li>
-</ul>
+#ui-datepicker-div {
+    box-shadow: 1px 1px 2px 0 #707070;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+#currentBalance {
+    color: #385A72;
+}

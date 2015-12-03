@@ -1,12 +1,29 @@
 body {
-  /*background-image: url("../Images/mtngrl1024.jpg");*/
-  /*background-repeat: no-repeat;*/
+  background-image: url("../Images/mtngrl1024.jpg");
+  background-repeat: no-repeat;
   background-color: #b0c4de;
-  /*background-attachment: fixed;*/
-  /*background-size: cover;*/
-  /*margin:25px;*/
-  /*z-index:1;*/
+  background-attachment: fixed;
+  background-size: cover;
+  margin:25px;
+  z-index:1;
   position:relative;
+  /*background-size: 1024px 768px;
+  width: 1024px;
+  height: 768px;*/
+
+}
+
+#introMessage {
+	/*background-image:url(chicago.jpg);*/
+	/*xwidth:100px;*/
+	/*xheight:100px;*/
+	text-align: left;
+	/*float:left;*/
+}
+
+#introMessage:hover #tagName {
+	opacity:0.9;
+	filter:alpha(opacity=90);
 }
 
 .myButton {
@@ -84,13 +101,6 @@ tr.withdrawRow {
 }
 tr.depositRow {
   color: #16A808;
-}
-div.jqplot-highlighter-tooltip{
-	opacity:.9;
-	background:rgba(208,208,208,0.95);
-	color:black;
-	border:solid black 1px;
-	padding:2px;
 }
 #mainTable {
     xbackground-color: white;
@@ -211,7 +221,10 @@ x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
 	background:red;
 	cursor: pointer;
 }
-
+#mainTable tr.selectedRow td.edit, #mainTable tr.selectedRow td.delete{
+	visibility: visible;
+	z-index:1
+}
 .ui-autocomplete.ui-menu.ui-widget {
     width: 147px;
     list-style-type: none;
@@ -221,12 +234,15 @@ x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
 .ui-menu li.ui-menu-item {
     font-size: 14px;
 }
-#mainTable tr.selectedRow td.edit, #mainTable tr.selectedRow td.delete{
-	visibility: visible;
-	z-index:1
-}
 #jqPlotAccount {
 	width:780px;
+}
+div.jqplot-highlighter-tooltip{
+	opacity:.9;
+	background:rgba(208,208,208,0.95);
+	color:black;
+	border:solid black 1px;
+	padding:2px;
 }
 #jqPlotMemo {
     width: 755px;
@@ -237,16 +253,12 @@ x#mainTable tr.editableRow:hover, x#mainTable tr.editableRow td:focus{
     width: 169px;
     font: 14px BlinkMacSystemFont;
 }
-
-#introMessage {
-	/*background-image:url(chicago.jpg);*/
-	/*xwidth:100px;*/
-	/*xheight:100px;*/
-	text-align: left;
-	/*float:left;*/
-}
-
-#introMessage:hover #tagName {
-	opacity:0.9;
-	filter:alpha(opacity=90);
-}
+/*
+<ul class=" ui-front ui-menu ui-widget ui-widget-content"
+    id="ui-id-1" tabindex="0" style="display: none; position:
+    relative; top: -254.328px; left: 173px; width: 1163px;">
+    <li class="ui-menu-item" id="ui-id-23" tabindex="-1">Cash</li>
+    <li class="ui-menu-item" id="ui-id-24" tabindex="-1">Credit Card</li>
+    <li class="ui-menu-item" id="ui-id-25" tabindex="-1">Check #</li>
+    <li class="ui-menu-item" id="ui-id-26" tabindex="-1">Direct Deposit</li>
+</ul>
