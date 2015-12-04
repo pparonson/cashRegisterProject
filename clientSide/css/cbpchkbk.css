@@ -235,6 +235,14 @@ display:none;
 	width:40px;
 	border-radius:20px;
 }
+#submitWithdrawlDiv {
+    padding-right: 0px;
+    width: 84.5px;
+}
+#submitDepositDiv {
+    padding-left: 0px;
+    width: 84.5px;
+}
 #jqPlotAccount {
 	width:780px;
 }

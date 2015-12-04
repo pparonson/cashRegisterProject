@@ -76,10 +76,11 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 		});
 
 		//default hide withdrawl element
+		$("#submitDeposit").prop("disabled", true);
 		$("#submitWithdraw").prop("disabled", true);
 		// show / hide withdrawl and deposit buttons
 		$(document).on('change','#memo',function(){
-            if ($(this).find("option:selected").attr('value') !== 'deposit') {
+            if ($(this).find("option:selected").attr('value') !== 'Deposit') {
 				$("#submitDeposit").prop("disabled", true);
 				$("#submitWithdraw").prop("disabled", false);
 			} else {

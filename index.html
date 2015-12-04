@@ -58,8 +58,9 @@
                             placeholder="Transaction Type">
                     </div>
                     <div class="col-md-2">
-                        <select class="form-control" name="memo" id="memo" placeholder="Memo" required>
-                            <option value="deposit" selected>Deposit</option>
+                        <select class="form-control" name="memo" id="memo">
+                            <option selected="selected" disabled="disabled">Choose option</option>
+                            <option value="Deposit">Deposit</option>
                             <option>Transportation</option>
                             <option>Entertainment</option>
                             <option>Food</option>
@@ -74,8 +75,8 @@
                         </select>
                     </div>
                     <div class="col-md-2">
-                        <input class="form-control" type="number" name="amount" id="transactionAmount"
-                            placeholder="Transaction Amount" required>
+                        <input class="form-control" type="number" name="amount"
+                            id="transactionAmount" placeholder="Transaction Amount">
                     </div>
                     <div class="col-md-1" id="submitWithdrawlDiv">
                         <!-- <input class="form-control" type="button" value="&#x2013;" id="submitWithdraw"> -->
