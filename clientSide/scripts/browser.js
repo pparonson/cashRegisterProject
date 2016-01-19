@@ -89,6 +89,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 			}
           });
 		$("#submitDeposit").click(function() {
+			console.log("delete account");
 				try{
 					account.addTransaction(
 						($("#transactionAmount").val() * 1)
@@ -116,6 +117,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 		});//end: fn
 
 		$("#deleteAccount").click(function() {
+			console.log("delete account");
 			account = null;
 			$("#accountMainPage").css("display","none");
 			$("#welcomePage").css("display","block");
@@ -326,7 +328,10 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 		$("#jqPlotMemo").empty();
 		if (account.transactions.length > 0) {
 			var data = setPieChartData();
-			$.jqplot('jqPlotMemo', [data], options);
+			if (data.length > 0) {
+				$.jqplot('jqPlotMemo', [data], options);
+			}
+
 		}//end: if
 	}//end: fn presentAccount()
 
@@ -364,6 +369,7 @@ require(["cashRegister", "jquery", "jqueryui", "jqplot", "jqplothighlighter"
 		pieChartData[10] = ["Miscellaneous", 0];
 
 		$.each(account.transactions, function(key, value) {
+
 			switch(value.memo) {
     			case "Transportation":
         			pieChartData[0][1] -= value.amount;
